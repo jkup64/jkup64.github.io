@@ -1,0 +1,366 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Cherno笔记(51-70) | 徒心的网络自留地</title><meta name="author" content="徒心"><meta name="copyright" content="徒心"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="课程地址：Youtube上TheCherno上传的视频 翻译：神经元猫的高质量翻译 51 Making and Working with Libraries in C++ (Multiple Projects in Visual Studio) 讲如何在vs中建立多个项目，以及如何创建一个库让所有项目都能用。  确保目标project的配置类型为静态类.(lib)。 设置“附件包含目录”以便能在i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cherno笔记(51-70)">
+<meta property="og:url" content="https://jkup64.github.io/2023/04/15/C-Cherno-Cherno%E7%AC%94%E8%AE%B0-51-70/index.html">
+<meta property="og:site_name" content="徒心的网络自留地">
+<meta property="og:description" content="课程地址：Youtube上TheCherno上传的视频 翻译：神经元猫的高质量翻译 51 Making and Working with Libraries in C++ (Multiple Projects in Visual Studio) 讲如何在vs中建立多个项目，以及如何创建一个库让所有项目都能用。  确保目标project的配置类型为静态类.(lib)。 设置“附件包含目录”以便能在i">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://jkup64.github.io/images/cpp.png">
+<meta property="article:published_time" content="2023-04-15T12:10:58.000Z">
+<meta property="article:modified_time" content="2023-06-16T07:34:52.760Z">
+<meta property="article:author" content="徒心">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jkup64.github.io/images/cpp.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://jkup64.github.io/2023/04/15/C-Cherno-Cherno%E7%AC%94%E8%AE%B0-51-70/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="6KEGOdCLLrPC5PX81XZwi31w2fujLtnRiMAZZjiFYow"/><meta name="baidu-site-verification" content="code-fuHCOXmgL5"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"距离文章上次更新已过去","messageNext":"天, 内容可能已过期."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: true,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Cherno笔记(51-70)',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-06-16 15:34:52'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/images/avater2.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">27</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/images/cpp.png')"><nav id="nav"><span id="blog-info"><a href="/" title="徒心的网络自留地"><span class="site-name">徒心的网络自留地</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Cherno笔记(51-70)</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-04-15T12:10:58.000Z" title="发表于 2023-04-15 20:10:58">2023-04-15</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-06-16T07:34:52.760Z" title="更新于 2023-06-16 15:34:52">2023-06-16</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/C/">C++</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/C/Cherno/">Cherno</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>19分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Cherno笔记(51-70)"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>课程地址：<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=18c3MTX0PK0&amp;list=PLlrATfBNZ98dudnM48yfGUldqGD0S4FFb&amp;index=1">Youtube上TheCherno上传的视频</a><br>
+翻译：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1uy4y167h2/?spm_id_from=333.788&amp;vd_source=0d3fa48307c38b76dfdfa60ed4b44b42">神经元猫的高质量翻译</a></p>
+<h1 id="51-Making-and-Working-with-Libraries-in-C-Multiple-Projects-in-Visual-Studio">51 Making and Working with Libraries in C++ (Multiple Projects in Visual Studio)</h1>
+<p>讲如何在vs中建立多个项目，以及如何创建一个库让所有项目都能用。</p>
+<ol>
+<li>确保目标project的配置类型为静态类.(lib)。</li>
+<li>设置“附件包含目录”以便能在include时能正确寻找到目标文件。</li>
+<li>添加引用，这会帮我们自动设置连接器输入，并且改名时不受影响，还会自动创建完整的依赖关系图，先编译依赖后编译此文件。</li>
+</ol>
+<p>由于是静态链接，移动后仍然可用，若为动态链接则必须和dll文件在同一目录下。</p>
+<h1 id="52-How-to-Deal-with-Multiple-Return-Values-in-C">52 How to Deal with Multiple Return Values in C++</h1>
+<h2 id="法1-返回struct">法1 返回struct</h2>
+<h2 id="法2-传入存结果的指针，没有动态分配">法2 传入存结果的指针，没有动态分配</h2>
+<p>从技术上来说可能是最理想的方法，因为没有复制。</p>
+<h2 id="法3-返回数组——只有类型相同时才适用">法3 返回数组——只有类型相同时才适用</h2>
+<p>声明：<code>static std::string* ParseShader(const std::string&amp; filepath);</code> 或 <code>static std::array&lt;std::string, 2&gt; ParseShader(const std::string&amp; filepath);</code> 改用vector也行</p>
+<p>返回：<code>return new std::string[]&#123;vs, fs&#125;;</code>或<code>return std::array&lt;std::string, 2&gt;(vs, fs);</code> new会导致堆分配的发生，同时只适合返回单一类型。</p>
+<p>array会在栈上创建，而vector底层存储是在堆上。</p>
+<h2 id="法4-返回tuple或pair，容易搞混">法4 返回tuple或pair，容易搞混</h2>
+<p>#include <tuple><br>
+#include <utility> (make_tuple)<br>
+static std::tuple或者pair&lt;返回类型1，返回类型2&gt; func( , )<br>
+return make_pair(返回值1，返回值2)</utility></tuple></p>
+<p>从tuple 中获得值<br>
+source=返回的元组(tuple or like pair)<br>
+std::get&lt;0/1/2/3&gt;(tuple名source);<br>
+pair 的类型，可以用 source.first</p>
+<h1 id="53-Templates-in-C">53 Templates in C++</h1>
+<p>template与“泛型”不同，也不能说完全不同，比泛型牛逼的多（泛型非常受限于类型系统）。template有点像宏。</p>
+<p>template允许定义一个可根据用途进行编译的模板（让编译器基于一套规则，为你写代码）。</p>
+<p><strong>模板不是实际存在的函数</strong>（MSVC中有错误可能也能过编译，vs2022不能过），只有当调用时才会被实际创建。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;  <span class="comment">// 用class或typename均可，这里class和类类型不是一个</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Print</span><span class="params">(T value)</span> </span>&#123;</span><br><span class="line">  std::cout &lt;&lt; value &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="built_in">Print</span>(<span class="number">5</span>);</span><br><span class="line">  <span class="built_in">Print</span>&lt;<span class="type">int</span>&gt;(<span class="number">6</span>);</span><br><span class="line">  <span class="built_in">Print</span>(<span class="number">5.5f</span>);</span><br><span class="line">  <span class="built_in">Print</span>(<span class="string">&quot;JKA&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>模板绝不仅限于类型或则任何东西，也不限于函数，可创建一整个类。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="type">int</span> N&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Array</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">  T m_Array[N];</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="function"><span class="type">int</span> <span class="title">GetSize</span><span class="params">()</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> N;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  Array&lt;std::string, <span class="number">5</span>&gt; array;</span><br><span class="line">  std::cout &lt;&lt; array.<span class="built_in">GetSize</span>() &lt;&lt; std::endl;</span><br><span class="line">  std::cin.<span class="built_in">get</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="54-Stack-vs-Heap-Memory-in-C">54 Stack vs Heap Memory in C++</h1>
+<p>堆内存和栈内存的 <strong>内存分配</strong> 方式不同。<br>
+栈分配非常快，所做的就是移动栈指针，就像一条CPU指令。栈大小比如2M。<br>
+堆内存分配是一堆事情，程序维护空闲列表，如果需要内存过大还会向OS申请内存，这非常耗费资源。<br>
+使用上，尽量使用堆，除非<strong>需要变量生存期</strong>大于作用域，或需要<strong>很大的内存</strong>。</p>
+<p>对于 struct Vector3 {float x, y, z;} 堆分配使用<code>Vector3* hvector = new Vector3();</code> 或<code>Vector3* hvector = new Vector3;</code> 都是可以的</p>
+<h1 id="55-Macros-in-C">55 Macros in C++</h1>
+<p>宏是一个很宽泛的概念，这里指C++中使用预处理器来“宏”化某些操作。<br>
+预处理器处理宏发生在预编译期，所做的就是查找和替换——所以不要加分号</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#defint LOG(x) std::cout &lt;&lt; x &lt;&lt; std::endl</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">LOG</span>(<span class="string">&quot;Hello&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>编程习惯：不要向人炫耀你知道所有的C++特性，尤其是高级特性更应当减少使用（新手常犯的误区）。<br>
+使用宏会让别人困惑，别人得去找到宏才能看懂。</p>
+<p>适合用宏的场景：在现实开发中在开发阶段需要日志系统，在发布阶段可能需要去掉（减少透露信息，提升性能）。</p>
+<p>在VS项目属性设置中，在**“DEBUG”配置中预处理器-预处理器定义中设置<code>PR_DEBUG=1</code>** （注意不要有空格，不过好像有也没事）</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用#if比使用#ifdef要好</span></span><br><span class="line"><span class="meta">#<span class="keyword">if</span> PR_DEBUG == 1</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LOG(x) std::cout &lt;&lt; x &lt;&lt; std::endl;</span></span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LOG(x)</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="built_in">LOG</span>(<span class="string">&quot;Hello&quot;</span>);</span><br><span class="line">  std::cin.<span class="built_in">get</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>可以使用反斜杠对换行符进行转移</strong>，注意后面不要有空格，否则就是对空格转义而非对换行符转义。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> MAIN int main() &#123;\</span></span><br><span class="line"><span class="meta">  std::cin.get();\</span></span><br><span class="line"><span class="meta">&#125;</span></span><br></pre></td></tr></table></figure>
+<h1 id="56-The-“auto”-keyword-in-C">56 The “auto” keyword in C++</h1>
+<p>两面性：一方面API改变修改返回值类型后客户端不需要修改，另一方面可能会<strong>破坏依赖于特定类型的代码、还会降低可读性</strong>（别人不能很快明白类型）。</p>
+<p>推荐：如果类型非常长就推荐用，此时当进入非常复杂的代码集，包含了模板等，就不得不用auto，因为不知道类型是什么（不要写这么复杂的代码，这很难向别人解释代码如何工作，很难维护）。</p>
+<p>auto不会加引用，存储返回结果得用 <code>const auto&amp; res =</code></p>
+<h1 id="57-Static-Arrays-in-C-std-array">57 Static Arrays in C++ (std::array)</h1>
+<p>std::array也是放在栈上，和普通数组的工作方式基本一样，不需要手动维护数组大小，还能使用sort等标准函数，还能可选边界检查（Release模式下无，边界检查会影响程序性能）。而std::vector是在堆上。<br>
+std::array的size直接返回模板参数，不是返回size变量等——<strong>不额外占用空间</strong>。<br>
+<strong>std::array的实现相当高效，应该用其替代C风格的数组。</strong></p>
+<p><strong>头文件如果是一个模板类，头文件就是所需的全部，不需要实现文件。</strong></p>
+<h1 id="58-Function-Pointers-in-C">58 Function Pointers in C++</h1>
+<p>本节课讲原始C风格的函数指针。</p>
+<p>函数指针是将一个函数赋值给一个变量的方法，这与我们之前通过()调用函数的使用方法不同，扩展：还能将函数作为参数传给其他函数。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">HelloWorld</span><span class="params">(<span class="type">int</span> a)</span> </span>&#123;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;Hello World! Value: &quot;</span> &lt;&lt; a &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">//auto func = HelloWorld;  // 法1，推荐</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// void(*func)(int) = HelloWorld;  // 法2, C风格函数指针真的很奇怪</span></span><br><span class="line">  <span class="comment">// void指返回值类型</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">typedef</span> <span class="title">void</span><span class="params">(*HelloWorldFunc)</span><span class="params">(<span class="type">int</span>)</span></span>;  <span class="comment">// 法3</span></span><br><span class="line">  HelloWorldFunc func = HelloWorld;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">func</span>(<span class="number">8</span>);</span><br><span class="line"></span><br><span class="line">  std::cin.<span class="built_in">get</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>lambda本质上就是一个普通函数，只是<strong>它不像普通函数这样声明，它是在我们的代码在过程中生成的，用完即弃的函数。</strong></p>
+<p>[ ] 叫做 捕获方式，即如何传入传出参数。</p>
+<p>注意下面代码中 函数指针 的写法。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">ForEach</span><span class="params">(<span class="type">const</span> std::vector&lt;<span class="type">int</span>&gt;&amp; values, <span class="type">void</span>(*func)(<span class="type">int</span>))</span> </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> value : values) &#123;</span><br><span class="line">    <span class="built_in">func</span>(value);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  std::vector&lt;<span class="type">int</span>&gt; values = &#123; <span class="number">1</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">2</span>, <span class="number">3</span> &#125;;  <span class="comment">// 初始化列表</span></span><br><span class="line">  <span class="built_in">ForEach</span>(values, [](<span class="type">int</span> value) &#123;  <span class="comment">// lambda表达式作为参数传递</span></span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Values: &quot;</span> &lt;&lt; value &lt;&lt; std::endl;</span><br><span class="line">    &#125;);</span><br><span class="line">  std::cin.<span class="built_in">get</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="59-Lambdas-in-C">59 Lambdas in C++</h1>
+<p>lambda本质上是定义一种叫作匿名函数的方式，不需要实际创建一个函数，就像一个快速的一次性函数，展示下需要运行的代码。<strong>它更像一个变量，而非一个正式的函数，在实际编译的代码中作为一个符号存在</strong>。</p>
+<p>工作原理：只要你有一个函数指针，都可以在C++中使用lambda。</p>
+<p>用法：在我们会设置函数指针指向函数的任何地方，都可以将它设置成lambda。我们所做的就是构造一个稍后会调用的函数。</p>
+<p>[ ] 捕获方式：打算如何传递变量。</p>
+<ul>
+<li>[=] 全部按值传递。</li>
+<li>[&amp;] 全部按引用传递。</li>
+<li>[a, &amp;b] a通过值传递，b通过引用传递。</li>
+</ul>
+<p><strong>非捕获lambda可以隐式转换为函数指针，而有捕获lambda不可以。</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">**<span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span>**</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;functional&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//无法将参数 2 从“main::&lt;lambda_2&gt;”转换为“void(__cdecl*)(int)”</span></span><br><span class="line"><span class="comment">//void ForEach(const std::vector&lt;int&gt;&amp; values, void(*func)(int)) &#123;</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">ForEach</span><span class="params">(<span class="type">const</span> std::vector&lt;<span class="type">int</span>&gt;&amp; values, <span class="type">const</span> std::function&lt;<span class="type">void</span>(<span class="type">int</span>)&gt;&amp; func)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> value : values)</span><br><span class="line">    <span class="built_in">func</span>(value);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  std::vector&lt;<span class="type">int</span>&gt; values = &#123; <span class="number">1</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">2</span>, <span class="number">3</span> &#125;;</span><br><span class="line">  <span class="keyword">auto</span> it = std::<span class="built_in">find_if</span>(values.<span class="built_in">begin</span>(), values.<span class="built_in">end</span>(), [](<span class="type">int</span> value) &#123;<span class="keyword">return</span> value &gt; <span class="number">0</span>; &#125;);</span><br><span class="line">  std::cout &lt;&lt; *it &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">  <span class="type">int</span> a = <span class="number">5</span>;</span><br><span class="line">  <span class="keyword">auto</span> lambda = [=](<span class="type">int</span> value) &#123;std::cout &lt;&lt; <span class="string">&quot;Values: &quot;</span> &lt;&lt; value &lt;&lt; std::endl; &#125;;</span><br><span class="line">  <span class="built_in">ForEach</span>(values, lambda);</span><br><span class="line">  std::cin.<span class="built_in">get</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="60-Why-I-don’t-“using-namespace-std”">60 Why I don’t “using namespace std”</h1>
+<p>使用using namespace std后就不知道所知用的函数来自哪个namespace。公司可能会有自己的stl版本，比如EASTL，std::vector和eastl::vector好区分，而使用using namespace 语句后就没那么容易区分了。</p>
+<p><strong>绝对不要在头文件中使用using namespace</strong>。<br>
+cherno也会用using namespace，但只会using自己的库，而不会使用std或者eastl。<br>
+如果确实要使用using namespace，就<strong>在一个足够小的作用域下使用。</strong></p>
+<h1 id="61-Namespaces-in-C">61 Namespaces in C++</h1>
+<p>C中无命名空间，不能将一个函数命名为Init，得叫glfwInit，glBegin等。</p>
+<p>C++中有命名空间，主要目的是避免命名冲突，希望能够在不同的上下文中调用相同的符号。</p>
+<p><code>::</code> 是命名空间操作符。</p>
+<p>**类本身也是一种命名空间；**枚举不是命名空间，而枚举类是。</p>
+<p>一般在头文件.h中禁止使用using namespace，因为这样会导致别人引用你的头文件时出现冲突。在cpp里你可以用，但为了养成良好习惯一般用什么写什么，比如using std::vector;</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">using</span> <span class="title">orange::print</span><span class="params">()</span></span>;  <span class="comment">// 只为print指定命名空间，print_again需再指定</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">apple::<span class="built_in">print_again</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> o = orange;  <span class="comment">// 为namespace起别名</span></span><br><span class="line">o::<span class="built_in">print</span>();</span><br></pre></td></tr></table></figure>
+<p><strong>严肃项目中，所有函数都应放在namespace xxx {} 里面。</strong></p>
+<h1 id="62-Threads-in-C">62 Threads in C++</h1>
+<p>如果不使用线程，无法让程序同时做两件事（比如同时等待用户输入，和向控制台打印消息）。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;thread&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">bool</span> s_Finished = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">DoWork</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">using</span> <span class="keyword">namespace</span> std::literals::chrono_literals;  <span class="comment">// 1s需要</span></span><br><span class="line"></span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;Thread id = &quot;</span> &lt;&lt; std::this_thread::<span class="built_in">get_id</span>() &lt;&lt; std::endl;</span><br><span class="line">  <span class="keyword">while</span> (!s_Finished) &#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Working...&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    std::this_thread::<span class="built_in">sleep_for</span>(<span class="number">1</span>s);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="function">std::thread <span class="title">worker</span><span class="params">(DoWork)</span></span>;  <span class="comment">// 参数为 函数指针 和 函数参数</span></span><br><span class="line">  <span class="comment">// eg: std::thread second (bar,0);</span></span><br><span class="line"></span><br><span class="line">  std::cin.<span class="built_in">get</span>();</span><br><span class="line">  s_Finished = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">  worker.<span class="built_in">join</span>();  <span class="comment">// main线程阻塞，等待worker线程退出</span></span><br><span class="line"></span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;Thread id = &quot;</span> &lt;&lt; std::this_thread::<span class="built_in">get_id</span>() &lt;&lt; std::endl;</span><br><span class="line">  std::cin.<span class="built_in">get</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="63-Timing-in-C">63 Timing in C++</h1>
+<p>标准写法可参考<a target="_blank" rel="noopener" href="https://www.notion.so/Cherno-17f2e807a69841bcb3e75063a6b2827d?pvs=21">74</a></p>
+<p><strong>chrono是C++库的一部分（C++11）</strong>，不需要使用操作系统。在chrono之前，如果想要非常精确的计时器，需要使用操作系统库（Windows中，有QueryPerformanceCounter）。</p>
+<p>chrono与平台无关，推荐使用（99%情况下使用chrono就好），除非正在做一些特定的底层的事情希望进一步减少开销，或者想要使用特定于平台的库。</p>
+<p>std::endl 很慢，推荐换成 \n。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;chrono&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;thread&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">using</span> <span class="keyword">namespace</span> std::literals::chrono_literals;</span><br><span class="line"></span><br><span class="line">  std::chrono::time_point&lt;std::chrono::steady_clock&gt; start = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line">  std::this_thread::<span class="built_in">sleep_for</span>(<span class="number">1</span>s);</span><br><span class="line">  <span class="keyword">auto</span> end = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line"></span><br><span class="line">  std::chrono::duration&lt;<span class="type">float</span>&gt; duration;</span><br><span class="line">  duration = end - start;</span><br><span class="line">  std::cout &lt;&lt; duration.<span class="built_in">count</span>() &lt;&lt; <span class="string">&quot;s&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">  </span><br><span class="line">  std::cin.<span class="built_in">get</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>instrumentation（插码）</code>，可以使用插码来实际修改源代码，以包含某种分析工具。</p>
+<p><strong>记时类</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;chrono&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;thread&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Timer</span> &#123;</span><br><span class="line">  std::chrono::time_point&lt;std::chrono::steady_clock&gt; start, end;</span><br><span class="line">  std::chrono::duration&lt;<span class="type">float</span>&gt; duration;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">Timer</span>() &#123;</span><br><span class="line">    start = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  ~<span class="built_in">Timer</span>() &#123;</span><br><span class="line">    end = std::chrono::high_resolution_clock::<span class="built_in">now</span>();</span><br><span class="line">    duration = end - start;</span><br><span class="line">    <span class="type">float</span> ms = duration.<span class="built_in">count</span>() * <span class="number">1000.0f</span>;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Timer took &quot;</span> &lt;&lt; ms &lt;&lt; <span class="string">&quot;ms\n&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  Timer timer;  <span class="comment">// 插码</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; ++i)</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Hello\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="built_in">Function</span>();</span><br><span class="line">  std::cin.<span class="built_in">get</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="64-Multidimensional-Arrays-in-C-2D-arrays">64 Multidimensional Arrays in C++ (2D arrays)</h1>
+<p>在处理任何类型的数组时，指针都是重要的，因为数组就是内存块，处理内存简单的方式就是使用指针。</p>
+<p>二维数组就是数组的数组，是数组的集合，int**就是指向int*数组的指针。</p>
+<p>int** a2d = new int*[5] 所做的就是分<strong>配20byte的空间</strong>（32位），这个空间后续可以存放其他类型数据比如float。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 二维数组</span></span><br><span class="line">  <span class="type">int</span>** a2d = <span class="keyword">new</span> <span class="type">int</span>* [<span class="number">5</span>];  <span class="comment">// 为5个指针分配空间</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; ++i)</span><br><span class="line">    a2d[i] = <span class="keyword">new</span> <span class="type">int</span>[<span class="number">5</span>];  <span class="comment">// 为5*5个数据分配空间</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; ++i)</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; <span class="number">5</span>; ++j)</span><br><span class="line">      a2d[i][j] = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; ++i)</span><br><span class="line">    <span class="keyword">delete</span>[] a2d[i];</span><br><span class="line">  <span class="keyword">delete</span>[] a2d;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 一维等效写法</span></span><br><span class="line">  <span class="type">int</span>* a1d = <span class="keyword">new</span> <span class="type">int</span>[<span class="number">25</span>];</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; ++i)</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; <span class="number">5</span>; ++j)</span><br><span class="line">      a1d[i * <span class="number">5</span> + j] = <span class="number">2</span>;</span><br><span class="line">  <span class="keyword">delete</span>[] a1d;</span><br><span class="line">  std::cin.<span class="built_in">get</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>堆分配方式，会被分配熬内存中完全随机的位置，可能很远——要访问全部数据，可能在访问一行数据后，要跳到其他维度，这会导致 <code>cache miss（缓存不命中）</code> ，这意味着我们在从ram中获取数据时浪费了时间。<br>
+<strong>内存分配越分散性能越差</strong>。优化时尽量让访问的内存存储在一块，这样定位数据时会有更多的cache hits以及更少的cache miss。</p>
+<h1 id="65-Sorting-in-C">65 Sorting in C++</h1>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">std::vector&lt;<span class="type">int</span>&gt; values = &#123; <span class="number">3</span>, <span class="number">5</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">2</span> &#125;;</span><br><span class="line">  std::<span class="built_in">sort</span>(values.<span class="built_in">begin</span>(), values.<span class="built_in">end</span>(), [](<span class="type">int</span> a, <span class="type">int</span> b) &#123;</span><br><span class="line">    <span class="keyword">if</span> (a == <span class="number">1</span>)  <span class="comment">// 确保1放在最后</span></span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span> (b == <span class="number">1</span>)  <span class="comment">// 应当这样设置</span></span><br><span class="line">      <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">return</span> a &lt; b;</span><br><span class="line">		<span class="comment">// 函数返回值含义：a是否应当在b前面</span></span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+<h1 id="66-Type-Punning-in-C">66 Type Punning in C++</h1>
+<p><strong>类型双关</strong>只是一个花哨的术语，用来在C++中绕过类型系统。<br>
+C++是强类型语言，有类型系统。C++中虽然类型是由编译器强制执行的，但可以直接访问内存，这是一种原始的、底层的访问。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a = <span class="number">50</span>;</span><br><span class="line"><span class="type">double</span> value = a;  <span class="comment">// 隐式转换，等价于double value = (double)a;</span></span><br><span class="line">std::cout &lt;&lt; value &lt;&lt; std::endl;  <span class="comment">// 50</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// a的内存为0x32</span></span><br><span class="line"><span class="comment">// b的内存为0x404900 00000000</span></span><br></pre></td></tr></table></figure>
+<p>类型双关：<code>double value = **(double**)&amp;a;</code> 取a的地址转换为double*指针，然后再解引用。这样处理会把a后面4字节的内存也复制过来。<br>
+PS：使用引用则为<code>double&amp; value = *(double*)&amp;a;</code></p>
+<p>理解：<strong>把目标内存当作不同类型的内存来对待。我们所需要做的只是将该类型作为指针，然后将其转换为另一个指针，如果由必要还可以进行解引用。</strong></p>
+<p>结构体（类）本身不包含任何数据的填充。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Entity</span> &#123;</span><br><span class="line">  <span class="type">int</span> x, y;</span><br><span class="line">	<span class="function"><span class="type">int</span>* <span class="title">GetPositions</span><span class="params">()</span> </span>&#123;  <span class="comment">// 让x,y作为数组返回，重新建数组太慢了</span></span><br><span class="line">		<span class="keyword">return</span> &amp;x;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  Entity e = &#123; <span class="number">5</span>, <span class="number">8</span> &#125;;</span><br><span class="line">  <span class="type">int</span>* position = (<span class="type">int</span>*)&amp;e;</span><br><span class="line">  std::cout &lt;&lt; position[<span class="number">0</span>] &lt;&lt; <span class="string">&quot;, &quot;</span> &lt;&lt; position[<span class="number">1</span>] &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">	<span class="type">int</span> y = *(<span class="type">int</span>*)((<span class="type">char</span>*)&amp;e + <span class="number">4</span>);  <span class="comment">// 实际中千万不要这样写</span></span><br><span class="line">  std::cout &lt;&lt; y &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">	<span class="type">int</span>* a = e.<span class="built_in">GetPositions</span>();</span><br><span class="line">  a[<span class="number">1</span>] = <span class="number">-1</span>;</span><br><span class="line">  std::cout &lt;&lt; e.x &lt;&lt; <span class="string">&quot;, &quot;</span> &lt;&lt; e.y &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">  std::cin.<span class="built_in">get</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="67-Unions-in-C">67 Unions in C++</h1>
+<p>联合体有点像类类型或结构体类型，只不<strong>过它一次只能占用一个成员的内存。类中各个成员共享内存</strong>，将a的值修改为5则d的值也会修改为5。</p>
+<p>可以像使用结构体和类一样使用联合体，可以给它添加静态函数或普通函数、方法等。<strong>然而，不能使用虚函数，还有其他一些限制。</strong></p>
+<p>通常人们用联合体来做的事是和<strong>类型双关</strong>紧密相关的。<br>
+当想给同一个变量取两个不同的名字时，或<strong>想用多种方法来处理相同的数据</strong>时，联合体很有用。</p>
+<p>通常union是匿名使用的，但是匿名union不能含有成员函数。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Vector2</span> &#123;</span><br><span class="line">  <span class="type">float</span> x, y;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Vector4</span> &#123;</span><br><span class="line">  <span class="keyword">union</span> &#123;</span><br><span class="line">    <span class="keyword">struct</span> &#123;</span><br><span class="line">      <span class="type">float</span> x, y, z, w;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">struct</span> &#123;</span><br><span class="line">      Vector2 a, b;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">PrintVector2</span><span class="params">(Vector2 v)</span> </span>&#123;</span><br><span class="line">  std::cout &lt;&lt; v.x &lt;&lt; <span class="string">&quot;, &quot;</span> &lt;&lt; v.y &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  Vector4 vector = &#123; <span class="number">1.0f</span>, <span class="number">2.0f</span>, <span class="number">3.0f</span>, <span class="number">4.0f</span> &#125;;</span><br><span class="line">  <span class="built_in">PrintVector2</span>(vector.a);</span><br><span class="line">  vector.z = <span class="number">100.0f</span>;</span><br><span class="line">  <span class="built_in">PrintVector2</span>(vector.b);</span><br><span class="line">  std::cin.<span class="built_in">get</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="68-Virtual-Destructors-in-C">68 Virtual Destructors in C++</h1>
+<p>虚析构函数就是<strong>虚函数</strong>和<strong>析构函数</strong>的组合。虚析构函数对于处理多态非常重要。</p>
+<p>在普通方法前标记为virtual，那么它就可以被覆写，这意味着虚函数表要做这样的设置。<br>
+虚析构函数有点不同，虚析构函数<strong>不是要覆写析构函数，而是加上一个析构函数</strong>。</p>
+<blockquote>
+<p>💡 <strong>只要允许一个类拥有子类，百分百需要声明析构函数是虚函数</strong>，否则没人能安全地扩展此类。</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Base</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="built_in">Base</span>() &#123; std::cout &lt;&lt; <span class="string">&quot;Base Constructor\n&quot;</span>; &#125;</span><br><span class="line">  ~<span class="built_in">Base</span>() &#123; std::cout &lt;&lt; <span class="string">&quot;Base Destructor\n&quot;</span>; &#125;  <span class="comment">// 加virtual后第3种情况与2同</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Derived</span> : <span class="keyword">public</span> Base &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="built_in">Derived</span>() &#123; std::cout &lt;&lt; <span class="string">&quot;Derived Constructor\n&quot;</span>; &#125;</span><br><span class="line">  ~<span class="built_in">Derived</span>() &#123; std::cout &lt;&lt; <span class="string">&quot;Derived Destructor\n&quot;</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  Base* base = <span class="keyword">new</span> <span class="built_in">Base</span>();</span><br><span class="line">  <span class="keyword">delete</span> base;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;----------------\n&quot;</span>;</span><br><span class="line">  Derived* derived = <span class="keyword">new</span> <span class="built_in">Derived</span>();</span><br><span class="line">  <span class="keyword">delete</span> derived;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;----------------\n&quot;</span>;</span><br><span class="line">  Base* poly = <span class="keyword">new</span> <span class="built_in">Derived</span>();</span><br><span class="line">  <span class="keyword">delete</span> poly;</span><br><span class="line">  std::cin.<span class="built_in">get</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Out</span></span><br><span class="line">Base Constructor</span><br><span class="line">Base Destructor</span><br><span class="line">----------------</span><br><span class="line">Base Constructor</span><br><span class="line">Derived Constructor</span><br><span class="line">Derived Destructor</span><br><span class="line">Base Destructor</span><br><span class="line">----------------</span><br><span class="line">Base Constructor</span><br><span class="line">Derived Constructor</span><br><span class="line">Base Destructor</span><br></pre></td></tr></table></figure>
+<p>注意：正常情况下，创建子类对象时，<strong>会先调用父类构造函数，再调用子类构造函数。</strong><br>
+删除子类对象时，会先调用子类析构函数，再调用父类析构函数。</p>
+<h1 id="69-Casting-in-C">69 Casting in C++</h1>
+<p>本节需要练习并通过经验来学习，而不是告诉它如何运作。这个话题上若只使用理论而没有实践，则不会有多大帮助。</p>
+<p><code>(int)value</code> 是 C语言风格类型转换。圆括号中指定了要强制转换的类型，然后是我们要强制转换的变量，变量可用括号括起来。</p>
+<p>C++风格类型转换共有4中主要的cast，它们<strong>不能做任何C风格类型转换所不能处理的事情</strong>。这不是添加新功能，只是添加一些语法糖（dynamic_cast会做运行时检查，其他的会做编译时检查）。</p>
+<ul>
+<li><strong>static_cast</strong> 用于进行比较“自然”和低风险的转换，如整型和浮点型、字符型之间的互相转换**，不能用于指针类型的强制转换。**</li>
+<li><strong>reinterpret_cast</strong> 用于进行各种<strong>不同类型的指针之间强制转换</strong>，把<strong>目标内存重新解释成别的东西</strong><br>
+<code>double s = reinterpret_cast&lt;AnotherClass*&gt;(&amp;value)  + 5.3;</code> 。</li>
+<li><strong>const_cast</strong> 用于进行<strong>去除或添加</strong> const 属性的转换。</li>
+<li><strong>dynamic_cast</strong> 不检查转换安全性，<strong>仅运行时检查（与运行时状态信息RTTI紧密相关）</strong>，如果不能转换，返回null。</li>
+</ul>
+<p>搞这么多cast的好处：除了可能收到检查外，还可以在代码库中搜索它们。</p>
+<h1 id="70-Conditional-and-Action-Breakpoints-in-C">70 Conditional and Action Breakpoints in C++</h1>
+<p>普通断点的缺点：需要<strong>停止应用程序，然后重新编译；有时还很难复现bug状态</strong>。</p>
+<p><strong>条件断点</strong>：可以告诉调试器，我想在此放置一个断点，但我只希望断点在特定条件下触发。</p>
+<p><strong>操作断点</strong>：允许我们采取某种动作，一般是在碰到断点时打印一些东西到控制台。</p>
+<p>右键断点，选择选择”条件“或者”操作“，”操作”中还能取消勾选“继续执行”。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://jkup64.github.io">徒心</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://jkup64.github.io/2023/04/15/C-Cherno-Cherno%E7%AC%94%E8%AE%B0-51-70/">https://jkup64.github.io/2023/04/15/C-Cherno-Cherno%E7%AC%94%E8%AE%B0-51-70/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://jkup64.github.io" target="_blank">徒心的网络自留地</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/images/cpp.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/04/07/C-Cherno-Cherno%E7%AC%94%E8%AE%B0-31-50/" title="Cherno笔记(31-50)"><img class="cover" src="/images/cpp.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Cherno笔记(31-50)</div></div></a></div><div class="next-post pull-right"><a href="/2023/05/01/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch01/" title="第1章 开始"><img class="cover" src="/images/cpp.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">第1章 开始</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#51-Making-and-Working-with-Libraries-in-C-Multiple-Projects-in-Visual-Studio"><span class="toc-text">51 Making and Working with Libraries in C++ (Multiple Projects in Visual Studio)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#52-How-to-Deal-with-Multiple-Return-Values-in-C"><span class="toc-text">52 How to Deal with Multiple Return Values in C++</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%951-%E8%BF%94%E5%9B%9Estruct"><span class="toc-text">法1 返回struct</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%952-%E4%BC%A0%E5%85%A5%E5%AD%98%E7%BB%93%E6%9E%9C%E7%9A%84%E6%8C%87%E9%92%88%EF%BC%8C%E6%B2%A1%E6%9C%89%E5%8A%A8%E6%80%81%E5%88%86%E9%85%8D"><span class="toc-text">法2 传入存结果的指针，没有动态分配</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%953-%E8%BF%94%E5%9B%9E%E6%95%B0%E7%BB%84%E2%80%94%E2%80%94%E5%8F%AA%E6%9C%89%E7%B1%BB%E5%9E%8B%E7%9B%B8%E5%90%8C%E6%97%B6%E6%89%8D%E9%80%82%E7%94%A8"><span class="toc-text">法3 返回数组——只有类型相同时才适用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%954-%E8%BF%94%E5%9B%9Etuple%E6%88%96pair%EF%BC%8C%E5%AE%B9%E6%98%93%E6%90%9E%E6%B7%B7"><span class="toc-text">法4 返回tuple或pair，容易搞混</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#53-Templates-in-C"><span class="toc-text">53 Templates in C++</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#54-Stack-vs-Heap-Memory-in-C"><span class="toc-text">54 Stack vs Heap Memory in C++</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#55-Macros-in-C"><span class="toc-text">55 Macros in C++</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#56-The-%E2%80%9Cauto%E2%80%9D-keyword-in-C"><span class="toc-text">56 The “auto” keyword in C++</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#57-Static-Arrays-in-C-std-array"><span class="toc-text">57 Static Arrays in C++ (std::array)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#58-Function-Pointers-in-C"><span class="toc-text">58 Function Pointers in C++</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#59-Lambdas-in-C"><span class="toc-text">59 Lambdas in C++</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#60-Why-I-don%E2%80%99t-%E2%80%9Cusing-namespace-std%E2%80%9D"><span class="toc-text">60 Why I don’t “using namespace std”</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#61-Namespaces-in-C"><span class="toc-text">61 Namespaces in C++</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#62-Threads-in-C"><span class="toc-text">62 Threads in C++</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#63-Timing-in-C"><span class="toc-text">63 Timing in C++</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#64-Multidimensional-Arrays-in-C-2D-arrays"><span class="toc-text">64 Multidimensional Arrays in C++ (2D arrays)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#65-Sorting-in-C"><span class="toc-text">65 Sorting in C++</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#66-Type-Punning-in-C"><span class="toc-text">66 Type Punning in C++</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#67-Unions-in-C"><span class="toc-text">67 Unions in C++</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#68-Virtual-Destructors-in-C"><span class="toc-text">68 Virtual Destructors in C++</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#69-Casting-in-C"><span class="toc-text">69 Casting in C++</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#70-Conditional-and-Action-Breakpoints-in-C"><span class="toc-text">70 Conditional and Action Breakpoints in C++</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 徒心</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>function loadWaline () {
+  function initWaline () {
+    const waline = Waline.init(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'https://waline-server-jkup64.vercel.app',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: false,
+    }, null))
+  }
+
+  if (typeof Waline === 'object') initWaline()
+  else {
+    getCSS('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css').then(() => {
+      getScript('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js').then(initWaline)
+    })
+  }
+}
+
+if ('Waline' === 'Waline' || !true) {
+  if (true) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+  else setTimeout(loadWaline, 0)
+} else {
+  function loadOtherComment () {
+    loadWaline()
+  }
+}</script></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
