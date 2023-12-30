@@ -1,0 +1,355 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>6.5840 2023 Lecture 3 GFS | 徒心的网络自留地</title><meta name="author" content="徒心"><meta name="copyright" content="徒心"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="课程网址：https:&#x2F;&#x2F;pdos.csail.mit.edu&#x2F;6.824&#x2F;schedule.html 以下内容来自课程课件，由于课件纯文本显示效果不佳，故对其排版整理并添加了部分个人笔记批注。  Today’s topic: storage + gfs + consistency Why hard? high performance -&gt; shared data across serve">
+<meta property="og:type" content="article">
+<meta property="og:title" content="6.5840 2023 Lecture 3 GFS">
+<meta property="og:url" content="https://jkup64.github.io/2023/10/09/%E5%88%86%E5%B8%83%E5%BC%8F-MIT6-5840-Lec-3-GFS/index.html">
+<meta property="og:site_name" content="徒心的网络自留地">
+<meta property="og:description" content="课程网址：https:&#x2F;&#x2F;pdos.csail.mit.edu&#x2F;6.824&#x2F;schedule.html 以下内容来自课程课件，由于课件纯文本显示效果不佳，故对其排版整理并添加了部分个人笔记批注。  Today’s topic: storage + gfs + consistency Why hard? high performance -&gt; shared data across serve">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://jkup64.github.io/images/MIT6.5840.png">
+<meta property="article:published_time" content="2023-10-09T08:47:04.000Z">
+<meta property="article:modified_time" content="2023-10-11T12:14:57.596Z">
+<meta property="article:author" content="徒心">
+<meta property="article:tag" content="分布式系统">
+<meta property="article:tag" content="MIT6.5840讲义">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jkup64.github.io/images/MIT6.5840.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://jkup64.github.io/2023/10/09/%E5%88%86%E5%B8%83%E5%BC%8F-MIT6-5840-Lec-3-GFS/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="6KEGOdCLLrPC5PX81XZwi31w2fujLtnRiMAZZjiFYow"/><meta name="baidu-site-verification" content="code-fuHCOXmgL5"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"距离文章上次更新已过去","messageNext":"天, 内容可能已过期."},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":500},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: true,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '6.5840 2023 Lecture 3 GFS',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-10-11 20:14:57'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/images/avater2.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">46</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/images/MIT6.5840.png')"><nav id="nav"><span id="blog-info"><a href="/" title="徒心的网络自留地"><span class="site-name">徒心的网络自留地</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">6.5840 2023 Lecture 3 GFS</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-10-09T08:47:04.000Z" title="发表于 2023-10-09 16:47:04">2023-10-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-10-11T12:14:57.596Z" title="更新于 2023-10-11 20:14:57">2023-10-11</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/MIT6-5840/">MIT6.5840</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>5分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="6.5840 2023 Lecture 3 GFS"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><blockquote>
+<p>课程网址：<a target="_blank" rel="noopener" href="https://pdos.csail.mit.edu/6.824/schedule.html">https://pdos.csail.mit.edu/6.824/schedule.html</a><br>
+以下内容来自课程课件，由于课件纯文本显示效果不佳，故对其排版整理并添加了部分个人笔记批注。</p>
+</blockquote>
+<h1 id="Today’s-topic-storage-gfs-consistency">Today’s topic: storage + gfs + consistency</h1>
+<h2 id="Why-hard">Why hard?</h2>
+<p>high performance -&gt; shared data across servers<br>
+many servers -&gt; constant faults<br>
+fault tolerance -&gt; replication<br>
+replication -&gt; potential inconsistencies<br>
+storge consistencies -&gt; lower performance</p>
+<blockquote>
+<p>Ideal consistency: behave as if single system<br>
+有两种风险: concurrency 和 fault</p>
+</blockquote>
+<h2 id="Why-storage-system-is-important">Why storage system is important?</h2>
+<p>建造fault tolerant存储系统后，应用程序可以是无状态的，存储系统存储持久化状态。</p>
+<h1 id="GFS-context">GFS context</h1>
+<ul>
+<li>Many Google services needed a big fast unified storage system<br>
+Mapreduce, crawler, indexer, log storage/analysis</li>
+<li>Shared among multiple applications e.g. crawl, index, analyze</li>
+<li>Huge capacity</li>
+<li>Huge performance</li>
+<li>Fault tolerant</li>
+<li>But:
+<ul>
+<li>just for internal Google use</li>
+<li>aimed at batch big-data performance, not interactive</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Google使用过GFS，后面提出的Colossus、以及其他类型的基于集群的文件系统比如MapReduce使用的HDFS的灵感都来源于GFS<br>
+在GFS之前的设计都不规范，这种不规范性来源于两方面：</p>
+<ol>
+<li>只有1个master，master不可复制——构建出的容错文件系统却包含单点故障</li>
+<li>inconsistencies<br>
+即使今天，在容错、复制、性能和一致性之间都存在着斗争</li>
+</ol>
+</blockquote>
+<hr>
+<h2 id="GFS-overview">GFS overview</h2>
+<ul>
+<li>100s/1000s of clients (e.g. MapReduce worker machines)</li>
+<li>100s of chunkservers, each with its own disk</li>
+<li>one coordinator</li>
+</ul>
+<h3 id="Capacity-story">Capacity story?</h3>
+<ul>
+<li>big files split into 64 MB chunks</li>
+<li>each file’s chunks striped/sharded over chunkservers<br>
+so a file can be much larger than any one disk</li>
+<li>each chunk in a Linux file</li>
+</ul>
+<blockquote>
+<p>stripe: n.条纹，线条；（军装上表示等级的）臂章，军阶条；类型，特点; v.给……加条纹<br>
+sharded: adj.分片的</p>
+</blockquote>
+<h3 id="Throughput-story">Throughput story?</h3>
+<ul>
+<li>clients talk directly to chunkservers to read/write data</li>
+<li>if lots of clients access different chunks, huge parallel throughput read or write</li>
+</ul>
+<h3 id="Fault-tolerance-story">Fault tolerance story?</h3>
+<ul>
+<li>each 64 MB chunk stored (replicated) on three chunkservers</li>
+<li>client writes are sent to all of a chunk’s copies</li>
+<li>a read just needs to consult one copy</li>
+</ul>
+<blockquote>
+<p>GFS并非完全自动容错，但在提高容错能力方面做的相当好</p>
+</blockquote>
+<h1 id="What-are-the-steps-when-client-C-wants-to-read-a-file">What are the steps when client C wants to read a file?</h1>
+<p><img src="/2023/10/09/%E5%88%86%E5%B8%83%E5%BC%8F-MIT6-5840-Lec-3-GFS/image-20231010163441161.png" alt="image-20231010163441161"></p>
+<ol>
+<li>C sends <strong>filename and offset</strong> to coordinator (CO) (if not cached)<br>
+CO has a <strong>filename -&gt; array-of-chunkhandle table</strong><br>
+and a <strong>chunkhandle -&gt; list-of-chunkservers table</strong></li>
+<li>CO finds chunk handle for that offset</li>
+<li>CO replies with chunkhandle + list of chunkservers</li>
+<li>C caches <strong>handle + chunkserver list</strong></li>
+<li>C sends request to nearest chunkserver<br>
+<strong>chunk handle, offset</strong></li>
+<li>chunk server reads from chunk file on disk, returns to client</li>
+</ol>
+<blockquote>
+<p>第4步中client缓存的目的：减少延迟 + 减少与master的通信，提高CO的throughput：缓存后当需要想通块时不需要向CO询问</p>
+</blockquote>
+<h2 id="Clients-only-ask-coordinator-where-to-find-a-file’s-chunks">Clients only ask coordinator where to find a file’s chunks</h2>
+<ul>
+<li>clients cache name -&gt; chunkhandle info</li>
+<li>coordinator does not handle data, so (hopefully) not heavily loaded</li>
+</ul>
+<blockquote>
+<p>master的状态维护：</p>
+<ul>
+<li>file name -&gt; array of chunk handles<br>
+放在stable storage中：如果master crash，重启后从日志中重建</li>
+<li>chunk handle -&gt; version# &amp;&amp; list of chunk servers (primary, ?secondaries?) 每个主服务器有一个释放时间<br>
+除了version外可放进内存中<br>
+version需要放进stable storage中，它需要知道chunk server的块是否是旧的。为什么不能是master向所有chunk server去要信息，然后找到最大版本号的那个作为最新块：有可能崩溃丢失的块才是最新块</li>
+<li>log + checkpoints<br>
+每当名称空间发生更改时，需要把log写入stable storage<br>
+在回应客户端之前，改变使master首先写入稳定存储器，然后对客户端回应<br>
+master的checkpoints也需要写入stable storage</li>
+</ul>
+</blockquote>
+<hr>
+<p>计划：storage gfs consistency</p>
+<p>Ideal consistency: behave as if single system<br>
+有两种风险: concurrency 和 fault</p>
+<p>GFS: performance -&gt; replication + FT -&gt;  consistency<br>
+GFS依然在2方面不规范：1、只有一个master，无法复制（包含单点故障）；2、in-consistencies，不具备强一致性，容错、复制、性能、一致性之间的斗争至今仍存在</p>
+<p>GFS 的关键属性：</p>
+<ul>
+<li>Big: large data set，比如MapReduce的数据集可能是整个万维网</li>
+<li>Fast: the way is to do automatic sharding</li>
+<li>Global: all apps see the same fs</li>
+<li>Fault tolerant: 并不会完全自动容错，但在提高容错能力方面做的相当好</li>
+</ul>
+<p>master的状态维护：</p>
+<ul>
+<li>file name -&gt; array of chunk handles<br>
+放在stable storage中：如果master crash，重启后从日志中重建</li>
+<li>chunk handle -&gt; version# &amp;&amp; list of chunk servers (primary, ?secondaries?) 每个主服务器有一个释放时间<br>
+除了version外可放进内存中<br>
+version需要放进stable storage中，它需要知道chunk server的块是否是旧的。为什么不能是master向所有chunk server去要信息，然后找到最大版本号的那个作为最新块：有可能崩溃丢失的块才是最新块</li>
+<li>log + checkpoints<br>
+每当名称空间发生更改时，需要把log写入stable storage<br>
+在回应客户端之前，改变使master首先写入稳定存储器，然后对客户端回应<br>
+master的checkpoints也需要写入stable storage</li>
+</ul>
+<p>Write a file: append<br>
+filename -&gt; chunk handles<br>
+handles-&gt;servers:</p>
+<ul>
+<li>increase #ver<br>
+master和chunk servers都把版本号放在stabel storage上</li>
+<li>primiary + secondary</li>
+<li>lease</li>
+</ul>
+<p>append时，检查#ver是否有效 + lease是否有效<br>
+如果primary向secondary B写入失败时，会重写，重写时使用不同的offset</p>
+<p>GFS只在google内部使用，所有节点都（认为）是可信的</p>
+<p>版本号由coordinator维护，并且仅在选取新的coordinator时才会增加<br>
+序列号和版本号不同</p>
+<p>当考虑consistency时，需要考虑所有可能的失败，并讨论这些失败是否会导致不一致</p>
+<p>如果master向primary发送心跳包得不到回应，也只能等到lease到期时才能选取新的primary，否则可能会有2个primary</p>
+<p>split brain syndrome 脑裂：产生两个primary<br>
+解决的方法就是使用lease，只有当lease expired时才选取新的primary</p>
+<p>获得更强的一致性：Update all P + s or none<br>
+GFS是针对MapReduce定制的？</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://jkup64.github.io">徒心</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://jkup64.github.io/2023/10/09/%E5%88%86%E5%B8%83%E5%BC%8F-MIT6-5840-Lec-3-GFS/">https://jkup64.github.io/2023/10/09/%E5%88%86%E5%B8%83%E5%BC%8F-MIT6-5840-Lec-3-GFS/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://jkup64.github.io" target="_blank">徒心的网络自留地</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/">分布式系统</a><a class="post-meta__tags" href="/tags/MIT6-5840%E8%AE%B2%E4%B9%89/">MIT6.5840讲义</a></div><div class="post_share"><div class="social-share" data-image="/images/MIT6.5840.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/10/09/%E5%88%86%E5%B8%83%E5%BC%8F-MIT6-5840-Lec-5-Raft1/" title="6.5840 2023 Lecture 5 Raft (1)"><img class="cover" src="/images/MIT6.5840.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">6.5840 2023 Lecture 5 Raft (1)</div></div></a></div><div class="next-post pull-right"><a href="/2023/10/25/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%EF%BC%88B%EF%BC%89-lab1/" title="lab1 Linux基础实验"><img class="cover" src="/images/summer_fever.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">lab1 Linux基础实验</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/09/29/%E5%88%86%E5%B8%83%E5%BC%8F-MIT6-5840-Lec-2-ThreadsAndRPC/" title="6.5840 2023 Lecture 2 Threads and RPC"><img class="cover" src="/images/MIT6.5840.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-29</div><div class="title">6.5840 2023 Lecture 2 Threads and RPC</div></div></a></div><div><a href="/2023/09/28/%E5%88%86%E5%B8%83%E5%BC%8F-MIT6-5840-Lec-1-Introduction/" title="6.5840 2023 Lecture 1 Introduction"><img class="cover" src="/images/MIT6.5840.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-28</div><div class="title">6.5840 2023 Lecture 1 Introduction</div></div></a></div><div><a href="/2023/05/21/%E5%88%86%E5%B8%83%E5%BC%8F-MIT6-5840-lab1-MapReduce-Copy/" title="Lab 1 MapReduce"><img class="cover" src="/images/MIT6.5840.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-21</div><div class="title">Lab 1 MapReduce</div></div></a></div><div><a href="/2023/10/09/%E5%88%86%E5%B8%83%E5%BC%8F-MIT6-5840-Lec-5-Raft1/" title="6.5840 2023 Lecture 5 Raft (1)"><img class="cover" src="/images/MIT6.5840.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-09</div><div class="title">6.5840 2023 Lecture 5 Raft (1)</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Today%E2%80%99s-topic-storage-gfs-consistency"><span class="toc-number">1.</span> <span class="toc-text">Today’s topic: storage + gfs + consistency</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Why-hard"><span class="toc-number">1.1.</span> <span class="toc-text">Why hard?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Why-storage-system-is-important"><span class="toc-number">1.2.</span> <span class="toc-text">Why storage system is important?</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#GFS-context"><span class="toc-number">2.</span> <span class="toc-text">GFS context</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#GFS-overview"><span class="toc-number">2.1.</span> <span class="toc-text">GFS overview</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Capacity-story"><span class="toc-number">2.1.1.</span> <span class="toc-text">Capacity story?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Throughput-story"><span class="toc-number">2.1.2.</span> <span class="toc-text">Throughput story?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Fault-tolerance-story"><span class="toc-number">2.1.3.</span> <span class="toc-text">Fault tolerance story?</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#What-are-the-steps-when-client-C-wants-to-read-a-file"><span class="toc-number">3.</span> <span class="toc-text">What are the steps when client C wants to read a file?</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Clients-only-ask-coordinator-where-to-find-a-file%E2%80%99s-chunks"><span class="toc-number">3.1.</span> <span class="toc-text">Clients only ask coordinator where to find a file’s chunks</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 徒心</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>(() => {
+  const initWaline = () => {
+    const waline = Waline.init(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'https://waline-server-jkup64.vercel.app',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: false,
+    }, null))
+  }
+
+  const loadWaline = async () => {
+    if (typeof Waline === 'object') initWaline()
+    else {
+      await getCSS('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css')
+      await getScript('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js')
+      initWaline()
+    }
+  }
+
+  if ('Waline' === 'Waline' || !true) {
+    if (true) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

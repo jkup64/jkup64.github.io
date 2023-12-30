@@ -1,0 +1,502 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>第14章 重载运算与类型转换 | 徒心的网络自留地</title><meta name="author" content="徒心"><meta name="copyright" content="徒心"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="基本概念  重载运算符是具有特殊名字的函数：由关键字operator和其后要定义的运算符号共同组成。 除了重载的函数调用运算符()外，其他重载运算符不能含有默认实参。 当一个重载的运算符是成员函数时，this绑定到左侧运算对象。动态运算符符函数的参数数量比运算对象的数量少一个。 只能重载大多数的运算符，而不能发明新的运算符号。 重载运算符的优先级和结合律跟对应的内置运算符保持一致。 调用方式：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第14章 重载运算与类型转换">
+<meta property="og:url" content="https://jkup64.github.io/2023/12/04/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch14/index.html">
+<meta property="og:site_name" content="徒心的网络自留地">
+<meta property="og:description" content="基本概念  重载运算符是具有特殊名字的函数：由关键字operator和其后要定义的运算符号共同组成。 除了重载的函数调用运算符()外，其他重载运算符不能含有默认实参。 当一个重载的运算符是成员函数时，this绑定到左侧运算对象。动态运算符符函数的参数数量比运算对象的数量少一个。 只能重载大多数的运算符，而不能发明新的运算符号。 重载运算符的优先级和结合律跟对应的内置运算符保持一致。 调用方式：">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://jkup64.github.io/images/cpp.png">
+<meta property="article:published_time" content="2023-12-04T13:45:58.000Z">
+<meta property="article:modified_time" content="2023-12-08T10:35:44.430Z">
+<meta property="article:author" content="徒心">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jkup64.github.io/images/cpp.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://jkup64.github.io/2023/12/04/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch14/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="6KEGOdCLLrPC5PX81XZwi31w2fujLtnRiMAZZjiFYow"/><meta name="baidu-site-verification" content="code-fuHCOXmgL5"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"距离文章上次更新已过去","messageNext":"天, 内容可能已过期."},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":500},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: true,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '第14章 重载运算与类型转换',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-12-08 18:35:44'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/images/avater2.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">46</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/images/cpp.png')"><nav id="nav"><span id="blog-info"><a href="/" title="徒心的网络自留地"><span class="site-name">徒心的网络自留地</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">第14章 重载运算与类型转换</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-12-04T13:45:58.000Z" title="发表于 2023-12-04 21:45:58">2023-12-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-12-08T10:35:44.430Z" title="更新于 2023-12-08 18:35:44">2023-12-08</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/C/">C++</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/C/%E3%80%8AC-Primer-5th%E3%80%8B/">《C++ Primer 5th》</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>8分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="第14章 重载运算与类型转换"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="基本概念">基本概念</h2>
+<ul>
+<li>重载运算符是具有特殊名字的函数：由关键字<code>operator</code>和其后要定义的运算符号共同组成。</li>
+<li>除了重载的函数调用运算符<code>()</code>外，其他重载运算符不能含有默认实参。</li>
+<li>当一个重载的运算符是成员函数时，<code>this</code>绑定到左侧运算对象。动态运算符符函数的参数数量比运算对象的数量<strong>少一个</strong>。</li>
+<li>只能重载大多数的运算符，而不能发明新的运算符号。</li>
+<li>重载运算符的优先级和结合律跟对应的内置运算符保持一致。</li>
+<li>调用方式：
+<ul>
+<li><code>data1 + data2;</code></li>
+<li><code>operator+(data1, data2);</code> 成员</li>
+<li><code>data1.operator+=(data2);</code> 非成员</li>
+</ul>
+</li>
+</ul>
+<p><strong>运算符</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>可以被重载</th>
+<th>不可以被重载</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code>, <code>^</code></td>
+<td><code>::</code>, <code>.*</code>, <code>.</code>, <code>? :</code>,</td>
+</tr>
+<tr>
+<td><code>&amp;</code>, `</td>
+<td><code>, </code>~`, `!`, `,`, `=`</td>
+</tr>
+<tr>
+<td><code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>, <code>++</code>, <code>--</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>&lt;&lt;</code>, <code>&gt;&gt;</code>, <code>==</code>, <code>!=</code>, <code>&amp;&amp;</code>, `</td>
+<td></td>
+</tr>
+<tr>
+<td><code>+=</code>, <code>-=</code>, <code>/=</code>, <code>%=</code>, <code>^=</code>, <code>&amp;=</code></td>
+<td></td>
+</tr>
+<tr>
+<td>|=, <code>*=</code>, <code>&lt;&lt;=</code>, <code>&gt;&gt;=</code>, <code>[]</code>, <code>()</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>-&gt;</code>, <code>-&gt;*</code>, <code>new</code>, <code>new[]</code>, <code>delete</code>, <code>delete[]</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="某些运算符不应该被重载">某些运算符不应该被重载</h3>
+<blockquote>
+<p>通常不应重载逗号、取地址、逻辑与和逻辑或运算符。</p>
+</blockquote>
+<ul>
+<li>由于使用重载的运算符本质上试一次函数调用，因此这些关于对象求值顺序的规则无法应用到重载的运算符上。因此逻辑与、逻辑或、逗号运算符的运算对象求值顺序规则无法保留下来。除此之外，重载保本也无法保留内置运算符的短路求值属性，因此不建议重载它们。</li>
+<li>一般补充在逗号运算符和取地址运算符，因为C++已经定义了它们用于类类型对象时的特殊含义，所以不应被重载，否则行为异于常态，用户难以适应。</li>
+</ul>
+<h3 id="选择作为成员或者非成员">选择作为成员或者非成员</h3>
+<p><strong>作为成员</strong></p>
+<ul>
+<li>赋值（<code>=</code>）、下标（<code>[]</code>）、调用（<code>()</code>）和成员访问箭头（<code>-&gt;</code>）运算符必须是成员。</li>
+<li>复合赋值运算符一般来说是成员。</li>
+<li>改变对象状态的运算符或者和给定类型密切相关的运算符通常是成员，如递增、解引用。</li>
+</ul>
+<p><strong>作为非成员</strong></p>
+<ul>
+<li>
+<p>具有<strong>对称性</strong>的运算符如算术、相等性、关系和位运算符等，通常是非成员函数。<br>
+如果把运算符定义为成员函数，那么<code>&quot;hi&quot; + s</code> 就会发生错误：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">string s = <span class="string">&quot;world&quot;</span>;</span><br><span class="line">string t = s + <span class="string">&quot;!&quot;</span>;  <span class="comment">// 正确</span></span><br><span class="line">string u = <span class="string">&quot;hi&quot;</span> + s; <span class="comment">// 错误</span></span><br></pre></td></tr></table></figure>
+<p>标准库中string的<code>+</code>运算符是定义成普通的非成员函数，第3条语句执行是没有问题的。</p>
+</li>
+<li>
+<p>作为非成员函数的要求：至少一个运算对象时类类型，并且运算对象都能准确无误地转换为实参类型。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[cling]$ std::string s1 = <span class="string">&quot;hi &quot;</span> + <span class="string">&quot;world&quot;</span>;</span><br><span class="line">input_line_4:<span class="number">2</span>:<span class="number">25</span>: error: <span class="function">invalid operands to binary <span class="title">expression</span> <span class="params">(<span class="string">&#x27;const char *&#x27;</span> <span class="keyword">and</span> <span class="string">&#x27;const char *&#x27;</span>)</span></span></span><br><span class="line"><span class="function"> std::string s1 </span>= <span class="string">&quot;hi &quot;</span> + <span class="string">&quot;world&quot;</span>;</span><br><span class="line">                  ~~~~~ ^ ~~~~~~~</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="练习14-1">练习14.1</h4>
+<p>Q: 在什么情况下重载的运算符与内置运算符有所区别？在什么情况下重载的运算符又与内置运算符一样？</p>
+<p>A: 相同点：</p>
+<ul>
+<li>优先级、结合性及操作数的数目都不变</li>
+</ul>
+<p>不同点：</p>
+<ul>
+<li>重载操作符必须具有至少一个class或枚举类型的操作数</li>
+<li>重载操作符不保证操作数的求值顺序，例如对<code>&amp;&amp;</code>和<code>||</code> 的重载版本不在具有”短路求值“的特性，两个操作数都要求值，且不规定操作数的求值顺序。</li>
+</ul>
+<h4 id="练习-14-4">练习 14.4</h4>
+<p>Q: 如何确定下列运算符是否应该是类的成员？</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">(a) %</span><br><span class="line">(b) %=</span><br><span class="line">(c) ++</span><br><span class="line">(d) -&gt;</span><br><span class="line">(e) &lt;&lt;</span><br><span class="line">(f) &amp;&amp;</span><br><span class="line">(g) ==</span><br><span class="line">(h) ()</span><br></pre></td></tr></table></figure>
+<p>A:</p>
+<ul>
+<li>(a) 不需要是成员。</li>
+<li>(b) 是成员。</li>
+<li>© 是成员。</li>
+<li>(d) 必须是成员。</li>
+<li>(e) 不需要是成员。</li>
+<li>(f) 不需要是成员。</li>
+<li>(g) 不需要是成员。</li>
+<li>(h) 必须是成员。</li>
+</ul>
+<h2 id="输入和输出运算符">输入和输出运算符</h2>
+<h3 id="重载输出运算符">重载输出运算符&lt;&lt;</h3>
+<ul>
+<li>第一个形参通常是一个<strong>非常量</strong>的<code>ostream</code>对象的引用。非常量是因为向流中写入会改变其状态；而引用是因为我们无法复制一个<code>ostream</code>对象。</li>
+<li><code>operator&lt;&lt;</code> 一般要返回它的<code>ostream</code>形参。</li>
+<li><strong>输入输出运算符必须是非成员函数</strong>。否则，其左侧运算对象将是我们的类的一个对象。<br>
+IO运算符通常需要读写类的非公有数据成员，因此IO运算符一般被声明为友元。</li>
+<li>输出运算符应主要负责打印对象的内容而非控制格式，输出运算符不应该打印换行符。</li>
+</ul>
+<h3 id="重载输入运算符">重载输入运算符&gt;&gt;</h3>
+<ul>
+<li>第一个形参通常是运算符将要读取的流的引用，第二个形参是将要读取到的（非常量）对象的引用。</li>
+<li><strong>输入运算符必须处理输入可能失败的情况</strong>，而输出运算符不需要。</li>
+<li>当读取发生错误时，输入运算符应负责从错误中恢复。</li>
+</ul>
+<h2 id="算术和关系运算符（-、-、-、-）">算术和关系运算符（+、-、*、/）</h2>
+<ul>
+<li>如果类同时定义了算数运算符和相关的复合赋值运算符，则通常情况下应该使用复合赋值来实现算数运算符。</li>
+</ul>
+<h3 id="相等运算符">相等运算符==</h3>
+<ul>
+<li>对称性：非成员friend函数。</li>
+<li>如果定义了<code>operator==</code>，则这个类也应该定义<code>operator!=</code>。</li>
+<li>相等运算符和不等运算符的一个应该把工作委托给另一个。</li>
+<li>相等运算符应该具有传递性。</li>
+<li>如果某个类在逻辑上有相等性的含义，则该类应该定义<code>operator==</code>，这样做可以使用户更容易使用标准库算法来处理这个类。</li>
+</ul>
+<h4 id="练习14-14">练习14.14</h4>
+<p>Q: 你觉得为什么调用 <code>operator+=</code> 来定义<code>operator+</code> 比其他方法更有效？</p>
+<p>A:  因为用 <code>operator+=</code> 会避免使用一个临时对象，而使得更有效。</p>
+<h3 id="关系运算符">关系运算符</h3>
+<ul>
+<li>如果存在唯一一种逻辑可靠的<code>&lt;</code>定义，则应该考虑为这个类定义<code>&lt;</code>运算符。如果同时还包含<code>==</code>，则当且晋档<code>&lt;</code>的定义和<code>++</code>产生的结果一直时才定义<code>&lt;</code>运算符。</li>
+</ul>
+<h2 id="赋值运算符">赋值运算符=</h2>
+<ul>
+<li>我们可以重载赋值运算符。不论形参的类型是什么，赋值运算符都必须定义为成员函数。</li>
+<li>赋值运算符必须定义成类的成员，复合赋值运算符通常情况下也应该这么做。这两类运算符都应该返回左侧运算对象的引用。</li>
+</ul>
+<h2 id="下标运算符">下标运算符[]</h2>
+<ul>
+<li>下标运算符必须是成员函数。</li>
+<li>一般会定义两个版本：
+<ul>
+<li>1.返回普通引用。</li>
+<li>2.类的常量成员，并返回常量引用。</li>
+</ul>
+</li>
+</ul>
+<h2 id="递增和递减运算符（-、–）">递增和递减运算符（++、–）</h2>
+<ul>
+<li>定义递增和递减运算符的类应该同时定义前置版本和后置版本。</li>
+<li>通常应该被定义成类的成员。</li>
+<li>为了和内置版本保持一致，前置运算符应该返回递增或递减后对象的引用。</li>
+<li>同样为了和内置版本保持一致，后置运算符应该返回递增或递减前对象的值，而不是引用。</li>
+<li>后置版本接受一个额外的，不被使用的<code>int</code>类型的形参。因为不会用到，所以无需命名。</li>
+</ul>
+<h2 id="成员访问运算符（-、-）">成员访问运算符（*、-&gt;）</h2>
+<ul>
+<li>箭头运算符必须是类的成员。解引用运算符通常也是类的成员，尽管并非必须如此。</li>
+<li>重载的箭头运算符必须返回类的指针或者自定义了箭头运算符的某个类的对象。</li>
+<li>解引用和乘法的区别是一个是一元运算符，一个是二元运算符。</li>
+</ul>
+<h2 id="函数调用运算符">函数调用运算符</h2>
+<ul>
+<li>可以像使用函数一样，调用该类的对象。因为这样对待类同时也能存储状态，所以与普通函数相比更加灵活。</li>
+<li>函数调用运算符必须是成员函数。</li>
+<li>一个类可以定义多个不同版本的调用运算符，相互之间应该在参数数量或类型上有所区别。</li>
+<li>如果累定义了调用运算符，则该类的对象称作<strong>函数对象</strong>。</li>
+</ul>
+<h3 id="lambda是函数对象"><code>lambda</code>是函数对象</h3>
+<ul>
+<li><code>lambda</code>捕获变量：<code>lambda</code>产生的类必须为每个值捕获的变量建立对应的数据成员，同时创建构造函数。</li>
+</ul>
+<h3 id="标准库定义的函数对象">标准库定义的函数对象</h3>
+<p><strong>标准库函数对象</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>算术</th>
+<th>关系</th>
+<th>逻辑</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>plus&lt;Type&gt;</code></td>
+<td><code>equal_to&lt;Type&gt;</code></td>
+<td><code>logical_and&lt;Type&gt;</code></td>
+</tr>
+<tr>
+<td><code>minus&lt;Type&gt;</code></td>
+<td><code>not_equal_to&lt;Type&gt;</code></td>
+<td><code>logical_or&lt;Type&gt;</code></td>
+</tr>
+<tr>
+<td><code>multiplies&lt;Type&gt;</code></td>
+<td><code>greater&lt;Type&gt;</code></td>
+<td><code>logical_not&lt;Type&gt;</code></td>
+</tr>
+<tr>
+<td><code>divides&lt;Type&gt;</code></td>
+<td><code>greater_equal&lt;Type&gt;</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>modulus&lt;Type&gt;</code></td>
+<td><code>less&lt;Type&gt;</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>negate&lt;Type&gt;</code></td>
+<td><code>less_equal&lt;Type&gt;</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>可以在算法中使用标准库函数对象。</li>
+</ul>
+<h3 id="可调用对象与function">可调用对象与function</h3>
+<p><strong>标准库function类型</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>function&lt;T&gt; f;</code></td>
+<td><code>f</code>是一个用来存储可调用对象的空<code>function</code>，这些可调用对象的调用形式应该与类型<code>T</code>相同。</td>
+</tr>
+<tr>
+<td><code>function&lt;T&gt; f(nullptr);</code></td>
+<td>显式地构造一个空<code>function</code></td>
+</tr>
+<tr>
+<td><code>function&lt;T&gt; f(obj)</code></td>
+<td>在<code>f</code>中存储可调用对象<code>obj</code>的副本</td>
+</tr>
+<tr>
+<td><code>f</code></td>
+<td>将<code>f</code>作为条件：当<code>f</code>含有一个可调用对象时为真；否则为假。</td>
+</tr>
+<tr>
+<td>定义为<code>function&lt;T&gt;</code>的成员的类型</td>
+<td></td>
+</tr>
+<tr>
+<td><code>result_type</code></td>
+<td>该<code>function</code>类型的可调用对象返回的类型</td>
+</tr>
+<tr>
+<td><code>argument_type</code></td>
+<td>当<code>T</code>有一个或两个实参时定义的类型。如果<code>T</code>只有一个实参，则<code>argument_type</code></td>
+</tr>
+<tr>
+<td><code>first_argument_type</code></td>
+<td>第一个实参的类型</td>
+</tr>
+<tr>
+<td><code>second_argument_type</code></td>
+<td>第二个实参的类型</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>例如：声明一个<code>function</code>类型，它可以表示接受两个<code>int</code>，返回一个<code>int</code>的可调用对象。<code>function&lt;int(int, int)&gt;</code></li>
+</ul>
+<h2 id="重载、类型转换、运算符">重载、类型转换、运算符</h2>
+<h3 id="类型转换运算符">类型转换运算符</h3>
+<ul>
+<li>类型转换运算符是类的一种特殊成员函数，它负责将一个类类型的值转换成其他类型。类型转换函数的一般形式如下：<code>operator type() const;</code></li>
+<li>一个类型转换函数必须是类的成员函数；它不能声明返回类型，形参列表也必须为空。类型转换函数通常应该是<code>const</code>。</li>
+<li>避免过度使用类型转换函数。</li>
+<li>C++11引入了显式的类型转换运算符。</li>
+<li>向<code>bool</code>的类型转换通常用在条件部分，因此<code>operator bool</code>一般定义成<code>explicit</code>的。</li>
+</ul>
+<h3 id="避免有二义性的类型转换">避免有二义性的类型转换</h3>
+<ul>
+<li>通常，不要为类第几个亿相同的类型转换，也不要在类中定义两个及以上转换源或转换目标是算术类型的转换。</li>
+<li>在调用重载函数时，如果需要额外的标准类型转换，则该转换的级别只有当所有可行函数都请求同一个用户定义的类型转换时才有用。如果所需的用户定义的类型转换不止一个，则该调用具有二义性。</li>
+</ul>
+<h3 id="函数匹配与重载运算符">函数匹配与重载运算符</h3>
+<ul>
+<li>如果<code>a</code>是一种类型，则表达式<code>a sym b</code>可能是：
+<ul>
+<li><code>a.operatorsym(b);</code></li>
+<li><code>operatorsym(a,b);</code></li>
+</ul>
+</li>
+<li>如果我们队同一个类既提供了转换目标是算术类型的类型转换，也提供了重载的运算符，则将会遇到重载运算符与内置运算符的二义性问题。</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://jkup64.github.io">徒心</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://jkup64.github.io/2023/12/04/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch14/">https://jkup64.github.io/2023/12/04/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch14/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://jkup64.github.io" target="_blank">徒心的网络自留地</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/images/cpp.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/12/03/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch13/" title="第13章 拷贝控制"><img class="cover" src="/images/cpp.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">第13章 拷贝控制</div></div></a></div><div class="next-post pull-right"><a href="/2023/12/11/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch15/" title="第15章 面向对象程序设计"><img class="cover" src="/images/cpp.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">第15章 面向对象程序设计</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.</span> <span class="toc-text">基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%90%E4%BA%9B%E8%BF%90%E7%AE%97%E7%AC%A6%E4%B8%8D%E5%BA%94%E8%AF%A5%E8%A2%AB%E9%87%8D%E8%BD%BD"><span class="toc-number">1.1.</span> <span class="toc-text">某些运算符不应该被重载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E4%BD%9C%E4%B8%BA%E6%88%90%E5%91%98%E6%88%96%E8%80%85%E9%9D%9E%E6%88%90%E5%91%98"><span class="toc-number">1.2.</span> <span class="toc-text">选择作为成员或者非成员</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%83%E4%B9%A014-1"><span class="toc-number">1.2.1.</span> <span class="toc-text">练习14.1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%83%E4%B9%A0-14-4"><span class="toc-number">1.2.2.</span> <span class="toc-text">练习 14.4</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">2.</span> <span class="toc-text">输入和输出运算符</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E8%BD%BD%E8%BE%93%E5%87%BA%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">2.1.</span> <span class="toc-text">重载输出运算符&lt;&lt;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E8%BD%BD%E8%BE%93%E5%85%A5%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">2.2.</span> <span class="toc-text">重载输入运算符&gt;&gt;</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%97%E6%9C%AF%E5%92%8C%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97%E7%AC%A6%EF%BC%88-%E3%80%81-%E3%80%81-%E3%80%81-%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">算术和关系运算符（+、-、*、&#x2F;）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B8%E7%AD%89%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">3.1.</span> <span class="toc-text">相等运算符&#x3D;&#x3D;</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%83%E4%B9%A014-14"><span class="toc-number">3.1.1.</span> <span class="toc-text">练习14.14</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">3.2.</span> <span class="toc-text">关系运算符</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%8B%E5%80%BC%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">4.</span> <span class="toc-text">赋值运算符&#x3D;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E6%A0%87%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">5.</span> <span class="toc-text">下标运算符[]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%92%E5%A2%9E%E5%92%8C%E9%80%92%E5%87%8F%E8%BF%90%E7%AE%97%E7%AC%A6%EF%BC%88-%E3%80%81%E2%80%93%EF%BC%89"><span class="toc-number">6.</span> <span class="toc-text">递增和递减运算符（++、–）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%88%90%E5%91%98%E8%AE%BF%E9%97%AE%E8%BF%90%E7%AE%97%E7%AC%A6%EF%BC%88-%E3%80%81-%EF%BC%89"><span class="toc-number">7.</span> <span class="toc-text">成员访问运算符（*、-&gt;）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">8.</span> <span class="toc-text">函数调用运算符</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#lambda%E6%98%AF%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1"><span class="toc-number">8.1.</span> <span class="toc-text">lambda是函数对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%87%E5%87%86%E5%BA%93%E5%AE%9A%E4%B9%89%E7%9A%84%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1"><span class="toc-number">8.2.</span> <span class="toc-text">标准库定义的函数对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E8%B0%83%E7%94%A8%E5%AF%B9%E8%B1%A1%E4%B8%8Efunction"><span class="toc-number">8.3.</span> <span class="toc-text">可调用对象与function</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8D%E8%BD%BD%E3%80%81%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E3%80%81%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">9.</span> <span class="toc-text">重载、类型转换、运算符</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">9.1.</span> <span class="toc-text">类型转换运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%BF%E5%85%8D%E6%9C%89%E4%BA%8C%E4%B9%89%E6%80%A7%E7%9A%84%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-number">9.2.</span> <span class="toc-text">避免有二义性的类型转换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%8C%B9%E9%85%8D%E4%B8%8E%E9%87%8D%E8%BD%BD%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">9.3.</span> <span class="toc-text">函数匹配与重载运算符</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 徒心</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>(() => {
+  const initWaline = () => {
+    const waline = Waline.init(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'https://waline-server-jkup64.vercel.app',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: false,
+    }, null))
+  }
+
+  const loadWaline = async () => {
+    if (typeof Waline === 'object') initWaline()
+    else {
+      await getCSS('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css')
+      await getScript('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js')
+      initWaline()
+    }
+  }
+
+  if ('Waline' === 'Waline' || !true) {
+    if (true) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

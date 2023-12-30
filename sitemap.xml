@@ -2,9 +2,324 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://jkup64.github.io/2023/12/11/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch15/</loc>
+    
+    <lastmod>2023-12-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jkup64.github.io/2023/10/09/%E5%88%86%E5%B8%83%E5%BC%8F-MIT6-5840-Lec-5-Raft1/</loc>
+    
+    <lastmod>2023-12-12</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jkup64.github.io/2023/12/04/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch14/</loc>
+    
+    <lastmod>2023-12-08</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jkup64.github.io/2023/12/03/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch13/</loc>
+    
+    <lastmod>2023-12-03</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jkup64.github.io/2023/05/01/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch01/</loc>
+    
+    <lastmod>2023-12-01</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jkup64.github.io/2023/05/17/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch04/</loc>
+    
+    <lastmod>2023-12-01</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jkup64.github.io/2023/11/15/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch11/</loc>
+    
+    <lastmod>2023-12-01</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jkup64.github.io/2022/10/18/%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93-2022-%E7%BD%91%E5%AE%89%E4%BF%9D%E7%A0%94/</loc>
+    
+    <lastmod>2023-11-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jkup64.github.io/2023/11/30/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95-Archlinux-WSL-Segment-Fault/</loc>
+    
+    <lastmod>2023-11-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jkup64.github.io/2022/11/04/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95-ArchLinux%E7%94%A8%E6%88%B7%E6%9B%B4%E5%90%8D%E8%B8%A9%E5%9D%91/</loc>
+    
+    <lastmod>2023-11-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jkup64.github.io/2023/11/18/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch12/</loc>
+    
+    <lastmod>2023-11-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jkup64.github.io/2022/11/16/%E7%AE%97%E6%B3%95-%E3%80%8A%E5%89%91%E6%8C%87offer%E3%80%8B%E7%AC%94%E8%AE%B0/</loc>
+    
+    <lastmod>2023-11-15</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jkup64.github.io/2023/11/01/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch10/</loc>
+    
+    <lastmod>2023-11-12</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jkup64.github.io/2023/11/08/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%EF%BC%88B%EF%BC%89-lab2/</loc>
+    
+    <lastmod>2023-11-08</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jkup64.github.io/2023/10/25/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%EF%BC%88B%EF%BC%89-lab1/</loc>
+    
+    <lastmod>2023-10-25</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jkup64.github.io/2023/09/28/%E5%88%86%E5%B8%83%E5%BC%8F-MIT6-5840-Lab-1-MapReduce/</loc>
+    
+    <lastmod>2023-10-24</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jkup64.github.io/2023/09/10/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch09/</loc>
+    
+    <lastmod>2023-10-24</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jkup64.github.io/2023/09/03/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch08/</loc>
+    
+    <lastmod>2023-10-24</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jkup64.github.io/2023/10/09/%E5%88%86%E5%B8%83%E5%BC%8F-MIT6-5840-Lec-3-GFS/</loc>
+    
+    <lastmod>2023-10-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jkup64.github.io/2023/05/21/%E5%88%86%E5%B8%83%E5%BC%8F-MIT6-5840-lab1-MapReduce-Copy/</loc>
+    
+    <lastmod>2023-10-10</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jkup64.github.io/2023/09/28/%E5%88%86%E5%B8%83%E5%BC%8F-MIT6-5840-Lec-1-Introduction/</loc>
+    
+    <lastmod>2023-10-10</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jkup64.github.io/2023/09/29/%E5%88%86%E5%B8%83%E5%BC%8F-MIT6-5840-Lec-2-ThreadsAndRPC/</loc>
+    
+    <lastmod>2023-10-10</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jkup64.github.io/2023/09/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-CSAPP-l4-cachelab/</loc>
+    
+    <lastmod>2023-10-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jkup64.github.io/2023/09/30/Go-A-Tour-of-Go/</loc>
+    
+    <lastmod>2023-09-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jkup64.github.io/2023/08/27/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch07/</loc>
+    
+    <lastmod>2023-09-12</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jkup64.github.io/2022/11/21/C-Google-C-%E9%A3%8E%E6%A0%BC%E5%AD%A6%E4%B9%A0/</loc>
+    
+    <lastmod>2023-09-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jkup64.github.io/2023/05/21/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-CSAPP-l1-datalab/</loc>
+    
+    <lastmod>2023-09-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://jkup64.github.io/2023/06/21/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-CSAPP-l3-attacklab/</loc>
     
-    <lastmod>2023-06-21</lastmod>
+    <lastmod>2023-09-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jkup64.github.io/2023/06/01/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch06/</loc>
+    
+    <lastmod>2023-08-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jkup64.github.io/2023/05/24/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch05/</loc>
+    
+    <lastmod>2023-08-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jkup64.github.io/2023/05/12/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch03/</loc>
+    
+    <lastmod>2023-08-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jkup64.github.io/2023/05/05/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch02/</loc>
+    
+    <lastmod>2023-08-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jkup64.github.io/2023/04/15/C-Cherno-Cherno%E7%AC%94%E8%AE%B0-51-70/</loc>
+    
+    <lastmod>2023-08-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jkup64.github.io/2023/04/01/C-Cherno-Cherno%E7%AC%94%E8%AE%B0-1-30/</loc>
+    
+    <lastmod>2023-08-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jkup64.github.io/2022/12/25/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95-butterfly%E7%9B%AE%E5%BD%95%E6%98%BE%E7%A4%BA%E5%BC%82%E5%B8%B8%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</loc>
+    
+    <lastmod>2023-08-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jkup64.github.io/2022/12/26/%E7%AE%97%E6%B3%95-AcWing%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E8%AF%BE-2-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc>
+    
+    <lastmod>2023-07-05</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -20,34 +335,7 @@
   </url>
   
   <url>
-    <loc>https://jkup64.github.io/2023/05/21/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-CSAPP-l1-datalab/</loc>
-    
-    <lastmod>2023-06-21</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://jkup64.github.io/2023/05/01/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch01/</loc>
-    
-    <lastmod>2023-06-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://jkup64.github.io/reading/index.html</loc>
-    
-    <lastmod>2023-06-16</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://jkup64.github.io/2023/04/15/C-Cherno-Cherno%E7%AC%94%E8%AE%B0-51-70/</loc>
     
     <lastmod>2023-06-16</lastmod>
     
@@ -59,78 +347,6 @@
     <loc>https://jkup64.github.io/2023/04/07/C-Cherno-Cherno%E7%AC%94%E8%AE%B0-31-50/</loc>
     
     <lastmod>2023-06-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://jkup64.github.io/2023/04/01/C-Cherno-Cherno%E7%AC%94%E8%AE%B0-1-30/</loc>
-    
-    <lastmod>2023-06-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://jkup64.github.io/2023/05/05/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch02/</loc>
-    
-    <lastmod>2023-06-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://jkup64.github.io/2023/05/12/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch03/</loc>
-    
-    <lastmod>2023-06-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://jkup64.github.io/2023/05/17/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch04/</loc>
-    
-    <lastmod>2023-06-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://jkup64.github.io/2023/05/24/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch05/</loc>
-    
-    <lastmod>2023-06-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://jkup64.github.io/2023/06/01/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch06/</loc>
-    
-    <lastmod>2023-06-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://jkup64.github.io/2022/11/21/%E7%AE%97%E6%B3%95-Google-C-%E9%A3%8E%E6%A0%BC%E5%AD%A6%E4%B9%A0/</loc>
-    
-    <lastmod>2023-04-27</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://jkup64.github.io/2022/11/16/%E7%AE%97%E6%B3%95-%E3%80%8A%E5%89%91%E6%8C%87offer%E3%80%8B%E7%AC%94%E8%AE%B0/</loc>
-    
-    <lastmod>2023-04-03</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -191,24 +407,6 @@
   </url>
   
   <url>
-    <loc>https://jkup64.github.io/2022/12/25/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95-butterfly%E7%9B%AE%E5%BD%95%E6%98%BE%E7%A4%BA%E5%BC%82%E5%B8%B8%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</loc>
-    
-    <lastmod>2023-01-05</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://jkup64.github.io/2022/11/04/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95-ArchLinux%E7%94%A8%E6%88%B7%E6%9B%B4%E5%90%8D%E8%B8%A9%E5%9D%91/</loc>
-    
-    <lastmod>2023-01-05</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://jkup64.github.io/2022/07/17/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-%E9%9A%90%E7%A7%81%E4%BF%9D%E6%8A%A4-2022-%E9%9A%90%E7%A7%81%E6%B1%82%E4%BA%A4%E6%8A%80%E6%9C%AF%E7%9A%84%E5%8E%9F%E7%90%86%E3%80%81%E5%8F%91%E5%B1%95%E5%8F%8A%E5%BA%94%E7%94%A8-%E7%AC%94%E8%AE%B0/</loc>
     
     <lastmod>2023-01-05</lastmod>
@@ -219,15 +417,6 @@
   
   <url>
     <loc>https://jkup64.github.io/2022/07/16/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-%E9%9A%90%E7%A7%81%E4%BF%9D%E6%8A%A4-2021-Asymmetrical-Vertical-Federated-Learning-%E7%AC%94%E8%AE%B0/</loc>
-    
-    <lastmod>2023-01-05</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://jkup64.github.io/2022/10/18/%E7%BB%8F%E9%AA%8C%E8%B4%B4-2022-%E7%BD%91%E5%AE%89%E4%BF%9D%E7%A0%94/</loc>
     
     <lastmod>2023-01-05</lastmod>
     
@@ -262,28 +451,10 @@
     <priority>0.6</priority>
   </url>
   
-  <url>
-    <loc>https://jkup64.github.io/2022/12/26/%E7%AE%97%E6%B3%95-AcWing%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E8%AF%BE-2-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc>
-    
-    <lastmod>2023-01-05</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://jkup64.github.io/2022/12/14/%E7%94%9F%E6%B4%BB%E6%9D%82%E8%AE%B0-%E4%B8%80%E6%AC%A1%E4%B8%8E%E5%B0%8F%E6%9C%8B%E5%8F%8B%E7%9A%84%E8%81%8A%E5%A4%A9/</loc>
-    
-    <lastmod>2023-01-05</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
 
   <url>
     <loc>https://jkup64.github.io/</loc>
-    <lastmod>2023-06-21</lastmod>
+    <lastmod>2023-12-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -291,84 +462,112 @@
   
   <url>
     <loc>https://jkup64.github.io/tags/%E7%AE%97%E6%B3%95%E9%A3%8E%E6%A0%BC/</loc>
-    <lastmod>2023-06-21</lastmod>
+    <lastmod>2023-12-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://jkup64.github.io/tags/Go/</loc>
+    <lastmod>2023-12-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jkup64.github.io/tags/Linux/</loc>
-    <lastmod>2023-06-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://jkup64.github.io/tags/%E3%80%8A%E5%89%91%E6%8C%87offer%E3%80%8B/</loc>
-    <lastmod>2023-06-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://jkup64.github.io/tags/Hexo/</loc>
-    <lastmod>2023-06-21</lastmod>
+    <lastmod>2023-12-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jkup64.github.io/tags/butterfly/</loc>
-    <lastmod>2023-06-21</lastmod>
+    <lastmod>2023-12-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://jkup64.github.io/tags/%E8%B4%AA%E5%BF%83/</loc>
-    <lastmod>2023-06-21</lastmod>
+    <loc>https://jkup64.github.io/tags/Hexo/</loc>
+    <lastmod>2023-12-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://jkup64.github.io/tags/%E6%95%B0%E4%BD%8DDP/</loc>
-    <lastmod>2023-06-21</lastmod>
+    <loc>https://jkup64.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/</loc>
+    <lastmod>2023-12-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://jkup64.github.io/tags/DP/</loc>
-    <lastmod>2023-06-21</lastmod>
+    <loc>https://jkup64.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/</loc>
+    <lastmod>2023-12-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://jkup64.github.io/tags/%E9%9A%90%E7%A7%81%E8%AE%A1%E7%AE%97/</loc>
-    <lastmod>2023-06-21</lastmod>
+    <loc>https://jkup64.github.io/tags/MIT6-5840%E8%AE%B2%E4%B9%89/</loc>
+    <lastmod>2023-12-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://jkup64.github.io/tags/PSI/</loc>
-    <lastmod>2023-06-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://jkup64.github.io/tags/%E8%81%94%E9%82%A6%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2023-06-21</lastmod>
+    <loc>https://jkup64.github.io/tags/%E3%80%8A%E5%89%91%E6%8C%87offer%E3%80%8B/</loc>
+    <lastmod>2023-12-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jkup64.github.io/tags/CSAPP/</loc>
-    <lastmod>2023-06-21</lastmod>
+    <lastmod>2023-12-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://jkup64.github.io/tags/%E8%B4%AA%E5%BF%83/</loc>
+    <lastmod>2023-12-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://jkup64.github.io/tags/%E9%9A%90%E7%A7%81%E8%AE%A1%E7%AE%97/</loc>
+    <lastmod>2023-12-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://jkup64.github.io/tags/PSI/</loc>
+    <lastmod>2023-12-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://jkup64.github.io/tags/%E8%81%94%E9%82%A6%E5%AD%A6%E4%B9%A0/</loc>
+    <lastmod>2023-12-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://jkup64.github.io/tags/DP/</loc>
+    <lastmod>2023-12-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://jkup64.github.io/tags/%E6%95%B0%E4%BD%8DDP/</loc>
+    <lastmod>2023-12-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -376,92 +575,113 @@
 
   
   <url>
-    <loc>https://jkup64.github.io/categories/%E7%94%9F%E6%B4%BB%E6%9D%82%E8%AE%B0/</loc>
-    <lastmod>2023-06-21</lastmod>
+    <loc>https://jkup64.github.io/categories/C/</loc>
+    <lastmod>2023-12-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://jkup64.github.io/categories/%E7%BB%8F%E9%AA%8C%E8%B4%B4/</loc>
-    <lastmod>2023-06-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://jkup64.github.io/categories/%E7%AE%97%E6%B3%95/</loc>
-    <lastmod>2023-06-21</lastmod>
+    <loc>https://jkup64.github.io/categories/%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93/</loc>
+    <lastmod>2023-12-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jkup64.github.io/categories/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/</loc>
-    <lastmod>2023-06-21</lastmod>
+    <lastmod>2023-12-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://jkup64.github.io/categories/C/</loc>
-    <lastmod>2023-06-21</lastmod>
+    <loc>https://jkup64.github.io/categories/Go/</loc>
+    <lastmod>2023-12-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://jkup64.github.io/categories/%E7%AE%97%E6%B3%95/AcWing%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E8%AF%BE/</loc>
-    <lastmod>2023-06-21</lastmod>
+    <loc>https://jkup64.github.io/categories/%E5%88%86%E5%B8%83%E5%BC%8F/</loc>
+    <lastmod>2023-12-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://jkup64.github.io/categories/C/Cherno/</loc>
-    <lastmod>2023-06-21</lastmod>
+    <loc>https://jkup64.github.io/categories/%E7%AE%97%E6%B3%95/</loc>
+    <lastmod>2023-12-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://jkup64.github.io/categories/%E7%AE%97%E6%B3%95/AcWing%E7%AE%97%E6%B3%95%E6%8F%90%E9%AB%98%E8%AF%BE/</loc>
-    <lastmod>2023-06-21</lastmod>
+    <loc>https://jkup64.github.io/categories/%E5%88%86%E5%B8%83%E5%BC%8F/MIT6-5840/</loc>
+    <lastmod>2023-12-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://jkup64.github.io/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/</loc>
-    <lastmod>2023-06-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://jkup64.github.io/categories/C/%E3%80%8AC-Primer-5th%E3%80%8B/</loc>
-    <lastmod>2023-06-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://jkup64.github.io/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/%E9%9A%90%E7%A7%81%E4%BF%9D%E6%8A%A4/</loc>
-    <lastmod>2023-06-21</lastmod>
+    <loc>https://jkup64.github.io/categories/%E5%88%86%E5%B8%83%E5%BC%8F/%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%EF%BC%88B%EF%BC%89/</loc>
+    <lastmod>2023-12-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jkup64.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/</loc>
-    <lastmod>2023-06-21</lastmod>
+    <lastmod>2023-12-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://jkup64.github.io/categories/C/Cherno/</loc>
+    <lastmod>2023-12-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://jkup64.github.io/categories/C/%E3%80%8AC-Primer-5th%E3%80%8B/</loc>
+    <lastmod>2023-12-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jkup64.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/CSAPP/</loc>
-    <lastmod>2023-06-21</lastmod>
+    <lastmod>2023-12-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://jkup64.github.io/categories/%E7%AE%97%E6%B3%95/AcWing%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E8%AF%BE/</loc>
+    <lastmod>2023-12-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://jkup64.github.io/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/</loc>
+    <lastmod>2023-12-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://jkup64.github.io/categories/%E7%AE%97%E6%B3%95/AcWing%E7%AE%97%E6%B3%95%E6%8F%90%E9%AB%98%E8%AF%BE/</loc>
+    <lastmod>2023-12-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://jkup64.github.io/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/%E9%9A%90%E7%A7%81%E4%BF%9D%E6%8A%A4/</loc>
+    <lastmod>2023-12-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>

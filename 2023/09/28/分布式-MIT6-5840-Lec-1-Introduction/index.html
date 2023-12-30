@@ -1,0 +1,519 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>6.5840 2023 Lecture 1 Introduction | 徒心的网络自留地</title><meta name="author" content="徒心"><meta name="copyright" content="徒心"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="课程网址：https:&#x2F;&#x2F;pdos.csail.mit.edu&#x2F;6.824&#x2F;schedule.html 以下内容来自课程课件，由于课件纯文本显示效果不佳，故对其排版整理并添加了部分个人笔记批注。  6.5840: Distributed Systems Engineering What I mean by “distributed system”:  a group of computers c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="6.5840 2023 Lecture 1 Introduction">
+<meta property="og:url" content="https://jkup64.github.io/2023/09/28/%E5%88%86%E5%B8%83%E5%BC%8F-MIT6-5840-Lec-1-Introduction/index.html">
+<meta property="og:site_name" content="徒心的网络自留地">
+<meta property="og:description" content="课程网址：https:&#x2F;&#x2F;pdos.csail.mit.edu&#x2F;6.824&#x2F;schedule.html 以下内容来自课程课件，由于课件纯文本显示效果不佳，故对其排版整理并添加了部分个人笔记批注。  6.5840: Distributed Systems Engineering What I mean by “distributed system”:  a group of computers c">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://jkup64.github.io/images/MIT6.5840.png">
+<meta property="article:published_time" content="2023-09-28T08:35:04.000Z">
+<meta property="article:modified_time" content="2023-10-10T08:52:25.211Z">
+<meta property="article:author" content="徒心">
+<meta property="article:tag" content="分布式系统">
+<meta property="article:tag" content="MIT6.5840讲义">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jkup64.github.io/images/MIT6.5840.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://jkup64.github.io/2023/09/28/%E5%88%86%E5%B8%83%E5%BC%8F-MIT6-5840-Lec-1-Introduction/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="6KEGOdCLLrPC5PX81XZwi31w2fujLtnRiMAZZjiFYow"/><meta name="baidu-site-verification" content="code-fuHCOXmgL5"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"距离文章上次更新已过去","messageNext":"天, 内容可能已过期."},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":500},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: true,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '6.5840 2023 Lecture 1 Introduction',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-10-10 16:52:25'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/images/avater2.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">46</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/images/MIT6.5840.png')"><nav id="nav"><span id="blog-info"><a href="/" title="徒心的网络自留地"><span class="site-name">徒心的网络自留地</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">6.5840 2023 Lecture 1 Introduction</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-09-28T08:35:04.000Z" title="发表于 2023-09-28 16:35:04">2023-09-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-10-10T08:52:25.211Z" title="更新于 2023-10-10 16:52:25">2023-10-10</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/MIT6-5840/">MIT6.5840</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>11分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="6.5840 2023 Lecture 1 Introduction"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><blockquote>
+<p>课程网址：<a target="_blank" rel="noopener" href="https://pdos.csail.mit.edu/6.824/schedule.html">https://pdos.csail.mit.edu/6.824/schedule.html</a><br>
+以下内容来自课程课件，由于课件纯文本显示效果不佳，故对其排版整理并添加了部分个人笔记批注。</p>
+</blockquote>
+<h1 id="6-5840-Distributed-Systems-Engineering">6.5840: Distributed Systems Engineering</h1>
+<h2 id="What-I-mean-by-“distributed-system”">What I mean by “distributed system”:</h2>
+<ul>
+<li>a group of computers cooperating to provide a service<br>
+this class is mostly about infrastructure services<br>
+e.g. storage for big web sites, MapReduce, peer-to-peer sharing</li>
+<li>lots of important infrastructure is distributed</li>
+</ul>
+<h2 id="Why-do-people-build-distributed-systems">Why do people build distributed systems?</h2>
+<ul>
+<li>to increase <strong>capacity</strong> via parallel processing</li>
+<li>to <strong>tolerate faults</strong> via replication</li>
+<li>to <strong>match distribution</strong> of physical devices e.g. sensors</li>
+<li>to increase <strong>security</strong> via isolation</li>
+</ul>
+<h2 id="But-it’s-not-easy">But it’s not easy:</h2>
+<ul>
+<li>concurrency</li>
+<li>complex interactions</li>
+<li>partial failure</li>
+<li>hard to get high performance</li>
+</ul>
+<h2 id="Why-study-this-topic">Why study this topic?</h2>
+<ul>
+<li>interesting – hard problems, powerful solutions</li>
+<li>widely used – driven by the rise of big Web sites</li>
+<li>active research area – important unsolved problems</li>
+<li>challenging to build – you’ll do it in the labs</li>
+</ul>
+<hr>
+<h1 id="COURSE-STRUCTURE">COURSE STRUCTURE</h1>
+<h2 id="Course-components">Course components:</h2>
+<p>lectures、papers、two exams、labs、final project (optional)</p>
+<h3 id="Lectures">Lectures:</h3>
+<p>big ideas, paper discussion, lab guidance<br>
+will be recorded, available online</p>
+<h3 id="Papers">Papers:</h3>
+<p>there’s a paper assigned for almost every lecture<br>
+research papers, some classic, some new<br>
+problems, ideas, implementation details, evaluation<br>
+please read papers before class!<br>
+web site has a short question for you to answer about each paper<br>
+and we ask you to send us a question you have about the paper<br>
+submit answer and question before start of lecture</p>
+<h3 id="Exams">Exams:</h3>
+<p>Mid-term exam in class<br>
+Final exam during finals week<br>
+Mostly about papers and labs</p>
+<h3 id="Labs">Labs:</h3>
+<p>goal: deeper understanding of some important ideas<br>
+goal: experience with distributed programming<br>
+first lab is due a week from Friday<br>
+one per week after that for a while</p>
+<blockquote>
+<p>Lab 1: distributed big-data framework (like MapReduce)<br>
+Lab 2: fault tolerance using replication (Raft)<br>
+Lab 3: a simple fault-tolerant database<br>
+Lab 4: scalable database performance via sharding</p>
+</blockquote>
+<h3 id="Optional-final-project-at-the-end-in-groups-of-2-or-3">Optional final project at the end, in groups of 2 or 3.</h3>
+<p>The final project substitutes for Lab 4.<br>
+You think of a project and clear it with us.<br>
+Code, short write-up, demo on last day.</p>
+<hr>
+<h1 id="MAIN-TOPICS">MAIN TOPICS</h1>
+<h2 id="This-is-a-course-about-infrastructure-for-applications">This is a course about infrastructure for applications.</h2>
+<ul>
+<li>
+<p>Storage.</p>
+</li>
+<li>
+<p>Communication.</p>
+</li>
+<li>
+<p>Computation.</p>
+</li>
+</ul>
+<blockquote>
+<p>A big goal: hide the complexity of distribution from applications.</p>
+</blockquote>
+<h3 id="Topic-fault-tolerance">Topic: fault tolerance</h3>
+<ul>
+<li>1000s of servers, big network -&gt; always something broken<br>
+We’d like to hide these failures from the application.<br>
+“High availability”: service continues despite failures</li>
+<li>Big idea: <strong>replicated servers</strong>.<br>
+If one server crashes, can proceed using the other(s).<br>
+Labs 2 and 3</li>
+</ul>
+<h2 id="Topic-consistency">Topic: consistency</h2>
+<ul>
+<li>General-purpose infrastructure needs well-defined behavior.<br>
+E.g. “Get(key) yields the value from the most recent Put(key,value).”</li>
+<li>Achieving good behavior is hard!<br>
+e.g. “Replica” servers are hard to keep identical.</li>
+</ul>
+<h2 id="Topic-performance">Topic: performance</h2>
+<ul>
+<li>The goal: scalable throughput<br>
+Nx servers -&gt; Nx total throughput via parallel CPU, RAM, disk, net.</li>
+<li>Scaling gets harder as N grows:<br>
+Load imbalance.<br>
+Slowest-of-N latency.<br>
+Some things don’t speed up with N: initialization, interaction.<br>
+Labs 1, 4</li>
+</ul>
+<h2 id="Topic-tradeoffs">Topic: tradeoffs</h2>
+<ul>
+<li><strong>Fault-tolerance, consistency, and performance are enemies.</strong><br>
+Fault tolerance and consistency require communication<br>
+e.g., send data to backup server<br>
+e.g., check if cached data is up-to-date<br>
+communication is often slow and non-scalable</li>
+<li>Many designs provide only weak consistency, to gain speed.<br>
+e.g. Get() might <em>not</em> yield the latest Put()!<br>
+Painful for application programmers but may be a good trade-off.<br>
+We’ll see many design points in the consistency/performance spectrum.</li>
+</ul>
+<h2 id="Topic-implementation">Topic: implementation</h2>
+<p>RPC, threads, concurrency control, configuration.<br>
+The labs…</p>
+<hr>
+<h1 id="CASE-STUDY-MapReduce">CASE STUDY: MapReduce</h1>
+<h2 id="Let’s-talk-about-MapReduce-MR">Let’s talk about MapReduce (MR)</h2>
+<ul>
+<li>a good illustration of 6.5840’s main topics</li>
+<li>hugely influential</li>
+<li>the focus of Lab 1</li>
+</ul>
+<h2 id="MapReduce-overview">MapReduce overview</h2>
+<ul>
+<li>context: multi-hour computations on multi-terabyte data-sets<br>
+e.g. build search index, or sort, or analyze structure of web<br>
+only practical with 1000s of computers<br>
+applications not written by distributed systems experts</li>
+<li>big goal: easy for non-specialist programmers<br>
+programmer just defines Map and Reduce functions<br>
+often fairly simple sequential code</li>
+<li>MR manages, and hides, all aspects of distribution!</li>
+</ul>
+<blockquote>
+<p>multi-hour是什么意思？<br>
+MapReduce不适合1000以上规模的集群吗？</p>
+</blockquote>
+<h2 id="Abstract-view-of-a-MapReduce-job-–-word-count">Abstract view of a MapReduce job – word count</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Input1 -&gt; Map -&gt; a,1 b,1</span><br><span class="line">Input2 -&gt; Map -&gt;     b,1</span><br><span class="line">Input3 -&gt; Map -&gt; a,1     c,1</span><br><span class="line">                  |   |   |</span><br><span class="line">                  |   |   -&gt; Reduce -&gt; c,1</span><br><span class="line">                  |   -----&gt; Reduce -&gt; b,2</span><br><span class="line">                  ---------&gt; Reduce -&gt; a,2</span><br></pre></td></tr></table></figure>
+<ol>
+<li>input is (already) split into M files</li>
+<li>MR calls Map() for each input file, produces list of k,v pairs<br>
+“intermediate” data<br>
+each Map() call is a “task”</li>
+<li>when Maps are done,<br>
+MR gathers all intermediate v’s for each k,<br>
+and passes each key + values to a Reduce call</li>
+<li>final output is set of &lt;k,v&gt; pairs from Reduce()s</li>
+</ol>
+<h2 id="Word-count-specific-code">Word-count-specific code</h2>
+<ul>
+<li>Map(k, v)<br>
+split v into words<br>
+for each word w<br>
+emit(w, “1”)</li>
+<li>Reduce(k, v_list)<br>
+emit(len(v_list))</li>
+</ul>
+<h2 id="MapReduce-scales-well">MapReduce scales well:</h2>
+<ul>
+<li>N “worker” computers (might) get you Nx throughput.<br>
+Maps()s can run in parallel, since they don’t interact.<br>
+Same for Reduce()s.</li>
+<li>Thus more computers -&gt; more throughput – very nice!</li>
+</ul>
+<h2 id="MapReduce-hides-many-details">MapReduce hides many details:</h2>
+<ul>
+<li>sending app code to servers</li>
+<li>tracking which tasks have finished</li>
+<li>“shuffling” intermediate data from Maps to Reduces</li>
+<li>balancing load over servers</li>
+<li>recovering from failures</li>
+</ul>
+<h2 id="However-MapReduce-limits-what-apps-can-do">However, MapReduce limits what apps can do:</h2>
+<ol>
+<li><strong>No interaction or state (other than via intermediate output).</strong></li>
+<li><strong>No iteration</strong></li>
+<li><strong>No real-time or streaming processing.</strong></li>
+</ol>
+<hr>
+<h1 id="Some-details-paper’s-Figure-1">Some details (paper’s Figure 1)</h1>
+<p><img src="/2023/09/28/%E5%88%86%E5%B8%83%E5%BC%8F-MIT6-5840-Lec-1-Introduction/image-20230929104728326.png" alt></p>
+<h2 id="Input-and-output-are-stored-on-the-GFS-cluster-file-system">Input and output are stored on the GFS cluster file system</h2>
+<ul>
+<li>MR needs huge parallel input and output throughput.</li>
+<li>GFS splits files over many servers, in 64 MB chunks<br>
+Maps read in parallel<br>
+Reduces write in parallel</li>
+<li>GFS also replicates each file on 2 or 3 servers</li>
+<li>GFS is a big win for MapReduce</li>
+</ul>
+<h2 id="The-“Coordinator”-manages-all-the-steps-in-a-job">The “Coordinator” manages all the steps in a job.</h2>
+<ol>
+<li>coordinator gives Map tasks to workers until all Maps complete<br>
+Maps write output (intermediate data) to local disk<br>
+Maps split output, by hash(key) mod R, into one file per Reduce task</li>
+<li>after all Maps have finished, coordinator hands out Reduce tasks<br>
+each Reduce task corresponds to one hash bucket of intermediate output<br>
+each Reduce fetches its intermediate output from (all) Map workers<br>
+each Reduce task writes a separate output file on GFS</li>
+</ol>
+<h2 id="What-will-likely-limit-the-performance">What will likely limit the performance?</h2>
+<p>We care since that’s the thing to optimize.</p>
+<p>CPU? memory? disk? network?</p>
+<ul>
+<li>In 2004 authors were limited by network capacity.<br>
+What does MR send over the network?<br>
+Maps read input from GFS.<br>
+Reduces read Map intermediate output.<br>
+Often as large as input, e.g. for sorting.<br>
+Reduces write output files to GFS.<br>
+[diagram: servers, tree of network switches]</li>
+<li>In MR’s all-to-all shuffle, half of traffic goes through root switch.<br>
+Paper’s root switch: 100 to 200 gigabits/second, total<br>
+1800 machines, so 55 megabits/second/machine.<br>
+55 is small:  much less than disk or RAM speed.</li>
+</ul>
+<h2 id="How-does-MR-minimize-network-use">How does MR minimize network use?</h2>
+<ol>
+<li><strong>Coordinator tries to run each Map task on GFS server that stores its input.</strong><br>
+All computers run both GFS and MR workers<br>
+So input is read from local disk (via GFS), not over network.</li>
+<li><strong>Intermediate data goes over network just once.</strong><br>
+Map worker writes to local disk.<br>
+Reduce workers read from Map worker disks over the network.<br>
+Storing it in GFS would require at least two trips over the network.</li>
+<li><strong>Intermediate data partitioned into files holding many keys.</strong><br>
+R is much smaller than the number of keys.<br>
+Big network transfers are more efficient.</li>
+</ol>
+<h2 id="How-does-MR-get-good-load-balance">How does MR get good load balance?</h2>
+<ul>
+<li>Wasteful and slow if N-1 servers have to wait for 1 slow server to finish.</li>
+<li>But some tasks likely take longer than others.</li>
+<li>Solution: <strong>many more tasks than worker machines.</strong><br>
+Coordinator hands out new tasks to workers who finish previous tasks.<br>
+No task is so big it dominates completion time (hopefully).<br>
+So faster servers do more tasks than slower ones,<br>
+And all finish at about the same time.</li>
+</ul>
+<h2 id="What-about-fault-tolerance">What about fault tolerance?</h2>
+<p>What if a worker crashes during a MR job?<br>
+We want to hide failures from the application programmer!<br>
+Does MR have to re-run the whole job from the beginning?<br>
+Why not?<br>
+<strong>MR re-runs just the failed Map()s and Reduce()s.</strong></p>
+<h2 id="Suppose-MR-runs-a-Map-twice-one-Reduce-sees-first-run’s-output-but-another-Reduce-sees-the-second-run’s-output">Suppose MR runs a Map twice, one Reduce sees first run’s output, but another Reduce sees the second run’s output?</h2>
+<p>Could the two Reduces produce inconsistent results?</p>
+<ul>
+<li>No: <strong>Map() must produce exactly the same result if run twice with same input</strong>.<br>
+And Reduce() too.</li>
+<li>So Map and Reduce must be <strong>pure deterministic functions</strong>:<br>
+they are only allowed to look at their arguments/input.<br>
+no state, no file I/O, no interaction, no external communication.</li>
+</ul>
+<h2 id="Details-of-worker-crash-recovery">Details of worker crash recovery:</h2>
+<ul>
+<li>a Map worker crashes:<br>
+coordinator notices worker no longer responds to pings<br>
+coordinator knows which Map tasks ran on that worker<br>
+<strong>those tasks’ intermediate output is now lost, must be re-created</strong><br>
+coordinator tells other workers to run those tasks<br>
+<strong>can omit re-running if all Reduces have fetched the intermediate data</strong></li>
+<li>a Reduce worker crashes:<br>
+<strong>finished tasks are OK – stored in GFS, with replicas.</strong><br>
+<strong>coordinator re-starts worker’s unfinished tasks on other workers.</strong></li>
+</ul>
+<h2 id="Other-failures-problems">Other failures/problems:</h2>
+<ul>
+<li>What if the coordinator gives two workers the same Map() task?<br>
+perhaps the coordinator incorrectly thinks one worker died.<br>
+it will tell Reduce workers about only one of them.</li>
+<li>What if the coordinator gives two workers the same Reduce() task?<br>
+they will both try to write the same output file on GFS!<br>
+atomic GFS rename prevents mixing; one complete file will be visible.</li>
+<li>What if a single worker is very slow – a “straggler”?<br>
+perhaps due to flakey hardware.<br>
+coordinator starts a second copy of last few tasks.</li>
+<li>What if a worker computes incorrect output, due to broken h/w or s/w?<br>
+too bad! MR assumes “fail-stop” CPUs and software.</li>
+<li>What if the coordinator crashes?</li>
+</ul>
+<blockquote>
+<p>正常情况下，coordinator（master）就不会给两个workers相同的Map()任务吗？<br>
+只有超时时才会把该任务分发给新worker吗？</p>
+<p>flakey(易出故障的；不可靠的(等于 flaky)</p>
+<p>h/w or s/w 是什么？</p>
+</blockquote>
+<h2 id="Current-status">Current status?</h2>
+<p>Hugely influential (Hadoop, Spark, &amp;c).<br>
+Probably no longer in use at Google.<br>
+Replaced by Flume / FlumeJava (see paper by Chambers et al).<br>
+GFS replaced by Colossus (no good description), and BigTable.</p>
+<hr>
+<h1 id="Conclusion">Conclusion</h1>
+<p>MapReduce made big cluster computation popular.</p>
+<ul>
+<li>-Not the most efficient or flexible.</li>
+</ul>
+<ul>
+<li>+Scales well.</li>
+<li>+Easy to program – failures and data movement are hidden.</li>
+</ul>
+<p>These were good trade-offs in practice.</p>
+<p>We’ll see some more advanced successors later in the course.<br>
+Have fun with Lab 1!</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://jkup64.github.io">徒心</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://jkup64.github.io/2023/09/28/%E5%88%86%E5%B8%83%E5%BC%8F-MIT6-5840-Lec-1-Introduction/">https://jkup64.github.io/2023/09/28/%E5%88%86%E5%B8%83%E5%BC%8F-MIT6-5840-Lec-1-Introduction/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://jkup64.github.io" target="_blank">徒心的网络自留地</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/">分布式系统</a><a class="post-meta__tags" href="/tags/MIT6-5840%E8%AE%B2%E4%B9%89/">MIT6.5840讲义</a></div><div class="post_share"><div class="social-share" data-image="/images/MIT6.5840.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/09/28/%E5%88%86%E5%B8%83%E5%BC%8F-MIT6-5840-Lab-1-MapReduce/" title="Lab 1 MapReduce"><img class="cover" src="/images/csapp.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Lab 1 MapReduce</div></div></a></div><div class="next-post pull-right"><a href="/2023/09/29/%E5%88%86%E5%B8%83%E5%BC%8F-MIT6-5840-Lec-2-ThreadsAndRPC/" title="6.5840 2023 Lecture 2 Threads and RPC"><img class="cover" src="/images/MIT6.5840.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">6.5840 2023 Lecture 2 Threads and RPC</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/09/29/%E5%88%86%E5%B8%83%E5%BC%8F-MIT6-5840-Lec-2-ThreadsAndRPC/" title="6.5840 2023 Lecture 2 Threads and RPC"><img class="cover" src="/images/MIT6.5840.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-09-29</div><div class="title">6.5840 2023 Lecture 2 Threads and RPC</div></div></a></div><div><a href="/2023/05/21/%E5%88%86%E5%B8%83%E5%BC%8F-MIT6-5840-lab1-MapReduce-Copy/" title="Lab 1 MapReduce"><img class="cover" src="/images/MIT6.5840.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-21</div><div class="title">Lab 1 MapReduce</div></div></a></div><div><a href="/2023/10/09/%E5%88%86%E5%B8%83%E5%BC%8F-MIT6-5840-Lec-3-GFS/" title="6.5840 2023 Lecture 3 GFS"><img class="cover" src="/images/MIT6.5840.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-09</div><div class="title">6.5840 2023 Lecture 3 GFS</div></div></a></div><div><a href="/2023/10/09/%E5%88%86%E5%B8%83%E5%BC%8F-MIT6-5840-Lec-5-Raft1/" title="6.5840 2023 Lecture 5 Raft (1)"><img class="cover" src="/images/MIT6.5840.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-10-09</div><div class="title">6.5840 2023 Lecture 5 Raft (1)</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#6-5840-Distributed-Systems-Engineering"><span class="toc-number">1.</span> <span class="toc-text">6.5840: Distributed Systems Engineering</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#What-I-mean-by-%E2%80%9Cdistributed-system%E2%80%9D"><span class="toc-number">1.1.</span> <span class="toc-text">What I mean by “distributed system”:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Why-do-people-build-distributed-systems"><span class="toc-number">1.2.</span> <span class="toc-text">Why do people build distributed systems?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#But-it%E2%80%99s-not-easy"><span class="toc-number">1.3.</span> <span class="toc-text">But it’s not easy:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Why-study-this-topic"><span class="toc-number">1.4.</span> <span class="toc-text">Why study this topic?</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#COURSE-STRUCTURE"><span class="toc-number">2.</span> <span class="toc-text">COURSE STRUCTURE</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Course-components"><span class="toc-number">2.1.</span> <span class="toc-text">Course components:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Lectures"><span class="toc-number">2.1.1.</span> <span class="toc-text">Lectures:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Papers"><span class="toc-number">2.1.2.</span> <span class="toc-text">Papers:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Exams"><span class="toc-number">2.1.3.</span> <span class="toc-text">Exams:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Labs"><span class="toc-number">2.1.4.</span> <span class="toc-text">Labs:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Optional-final-project-at-the-end-in-groups-of-2-or-3"><span class="toc-number">2.1.5.</span> <span class="toc-text">Optional final project at the end, in groups of 2 or 3.</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MAIN-TOPICS"><span class="toc-number">3.</span> <span class="toc-text">MAIN TOPICS</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#This-is-a-course-about-infrastructure-for-applications"><span class="toc-number">3.1.</span> <span class="toc-text">This is a course about infrastructure for applications.</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Topic-fault-tolerance"><span class="toc-number">3.1.1.</span> <span class="toc-text">Topic: fault tolerance</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Topic-consistency"><span class="toc-number">3.2.</span> <span class="toc-text">Topic: consistency</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Topic-performance"><span class="toc-number">3.3.</span> <span class="toc-text">Topic: performance</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Topic-tradeoffs"><span class="toc-number">3.4.</span> <span class="toc-text">Topic: tradeoffs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Topic-implementation"><span class="toc-number">3.5.</span> <span class="toc-text">Topic: implementation</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CASE-STUDY-MapReduce"><span class="toc-number">4.</span> <span class="toc-text">CASE STUDY: MapReduce</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Let%E2%80%99s-talk-about-MapReduce-MR"><span class="toc-number">4.1.</span> <span class="toc-text">Let’s talk about MapReduce (MR)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MapReduce-overview"><span class="toc-number">4.2.</span> <span class="toc-text">MapReduce overview</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Abstract-view-of-a-MapReduce-job-%E2%80%93-word-count"><span class="toc-number">4.3.</span> <span class="toc-text">Abstract view of a MapReduce job – word count</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Word-count-specific-code"><span class="toc-number">4.4.</span> <span class="toc-text">Word-count-specific code</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MapReduce-scales-well"><span class="toc-number">4.5.</span> <span class="toc-text">MapReduce scales well:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MapReduce-hides-many-details"><span class="toc-number">4.6.</span> <span class="toc-text">MapReduce hides many details:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#However-MapReduce-limits-what-apps-can-do"><span class="toc-number">4.7.</span> <span class="toc-text">However, MapReduce limits what apps can do:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Some-details-paper%E2%80%99s-Figure-1"><span class="toc-number">5.</span> <span class="toc-text">Some details (paper’s Figure 1)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Input-and-output-are-stored-on-the-GFS-cluster-file-system"><span class="toc-number">5.1.</span> <span class="toc-text">Input and output are stored on the GFS cluster file system</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-%E2%80%9CCoordinator%E2%80%9D-manages-all-the-steps-in-a-job"><span class="toc-number">5.2.</span> <span class="toc-text">The “Coordinator” manages all the steps in a job.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#What-will-likely-limit-the-performance"><span class="toc-number">5.3.</span> <span class="toc-text">What will likely limit the performance?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#How-does-MR-minimize-network-use"><span class="toc-number">5.4.</span> <span class="toc-text">How does MR minimize network use?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#How-does-MR-get-good-load-balance"><span class="toc-number">5.5.</span> <span class="toc-text">How does MR get good load balance?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#What-about-fault-tolerance"><span class="toc-number">5.6.</span> <span class="toc-text">What about fault tolerance?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Suppose-MR-runs-a-Map-twice-one-Reduce-sees-first-run%E2%80%99s-output-but-another-Reduce-sees-the-second-run%E2%80%99s-output"><span class="toc-number">5.7.</span> <span class="toc-text">Suppose MR runs a Map twice, one Reduce sees first run’s output, but another Reduce sees the second run’s output?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Details-of-worker-crash-recovery"><span class="toc-number">5.8.</span> <span class="toc-text">Details of worker crash recovery:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Other-failures-problems"><span class="toc-number">5.9.</span> <span class="toc-text">Other failures&#x2F;problems:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Current-status"><span class="toc-number">5.10.</span> <span class="toc-text">Current status?</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Conclusion"><span class="toc-number">6.</span> <span class="toc-text">Conclusion</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 徒心</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>(() => {
+  const initWaline = () => {
+    const waline = Waline.init(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'https://waline-server-jkup64.vercel.app',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: false,
+    }, null))
+  }
+
+  const loadWaline = async () => {
+    if (typeof Waline === 'object') initWaline()
+    else {
+      await getCSS('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css')
+      await getScript('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js')
+      initWaline()
+    }
+  }
+
+  if ('Waline' === 'Waline' || !true) {
+    if (true) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

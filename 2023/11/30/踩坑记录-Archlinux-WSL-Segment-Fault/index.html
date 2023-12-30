@@ -1,0 +1,225 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Archlinux WSL Segment Fault on Cypthon | 徒心的网络自留地</title><meta name="author" content="徒心"><meta name="copyright" content="徒心"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="先上结论：不要使用Archlinux WSL 重要的事情说三遍：  不要使用Archlinux WSL 不要使用Archlinux WSL 不要使用Archlinux WSL  看看Archlinux on WSL? &#x2F; Other Architectures &#x2F; Arch Linux Forums中大伙的评论：  It seems to be a set of initial unconfigu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Archlinux WSL Segment Fault on Cypthon">
+<meta property="og:url" content="https://jkup64.github.io/2023/11/30/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95-Archlinux-WSL-Segment-Fault/index.html">
+<meta property="og:site_name" content="徒心的网络自留地">
+<meta property="og:description" content="先上结论：不要使用Archlinux WSL 重要的事情说三遍：  不要使用Archlinux WSL 不要使用Archlinux WSL 不要使用Archlinux WSL  看看Archlinux on WSL? &#x2F; Other Architectures &#x2F; Arch Linux Forums中大伙的评论：  It seems to be a set of initial unconfigu">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://jkup64.github.io/images/archlinux.png">
+<meta property="article:published_time" content="2023-11-30T06:51:05.000Z">
+<meta property="article:modified_time" content="2023-11-30T07:07:32.887Z">
+<meta property="article:author" content="徒心">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jkup64.github.io/images/archlinux.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://jkup64.github.io/2023/11/30/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95-Archlinux-WSL-Segment-Fault/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="6KEGOdCLLrPC5PX81XZwi31w2fujLtnRiMAZZjiFYow"/><meta name="baidu-site-verification" content="code-fuHCOXmgL5"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"距离文章上次更新已过去","messageNext":"天, 内容可能已过期."},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":500},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: true,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Archlinux WSL Segment Fault on Cypthon',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-11-30 15:07:32'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/images/avater2.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">46</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/images/archlinux.png')"><nav id="nav"><span id="blog-info"><a href="/" title="徒心的网络自留地"><span class="site-name">徒心的网络自留地</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Archlinux WSL Segment Fault on Cypthon</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-11-30T06:51:05.000Z" title="发表于 2023-11-30 14:51:05">2023-11-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-11-30T07:07:32.887Z" title="更新于 2023-11-30 15:07:32">2023-11-30</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/">踩坑记录</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>10分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Archlinux WSL Segment Fault on Cypthon"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="先上结论：不要使用Archlinux-WSL">先上结论：不要使用Archlinux WSL</h1>
+<p>重要的事情说三遍：</p>
+<ol>
+<li>不要使用Archlinux WSL</li>
+<li>不要使用Archlinux WSL</li>
+<li>不要使用Archlinux WSL</li>
+</ol>
+<p>看看<a target="_blank" rel="noopener" href="https://bbs.archlinux.org/viewtopic.php?id=249547">Archlinux on WSL? / Other Architectures / Arch Linux Forums</a>中大伙的评论：</p>
+<ul>
+<li>It seems to be a set of initial unconfigured packages that you have to configure yourself.</li>
+<li>It isn’t Arch, and it isn’t supported by the community.</li>
+<li>Or is it maybe something unacceptable about it?<br>
+Correct, see <a target="_blank" rel="noopener" href="http://archlinux.2023198.n4.nabble.com/Windows-Subsystem-Linux-Arch-Linux-as-official-container-td4718272.html#a4718292">http://archlinux.2023198.n4.nabble.com/ … l#a4718292</a></li>
+</ul>
+<p>官方和社区都不支持，那还玩啥？</p>
+<h1 id="问题">问题</h1>
+<p>下面给出一个我在使用ArchLinux WSL中遇到的问题：</p>
+<p>当使用python运行一个使用了Cpython的脚本时，引发了<code>segment fault</code>，显示保存信息极少。使用<code>gdb python</code>然后<code>run &lt;script.py&gt;</code>进行调试，然后<code>backtrace</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">Thread 1 <span class="string">&quot;python&quot;</span> received signal SIGSEGV, Segmentation fault.</span><br><span class="line">0x00007fffcc488f3a <span class="keyword">in</span> std::basic_ostream&lt;char, std::char_traits&lt;char&gt; &gt;::sentry::sentry (this=0x7fffffffc980, __os=...)</span><br><span class="line">    at /opt/conda/conda-bld/gcc-compiler_1654084175708/work/build/gcc-final/x86_64-conda-linux-gnu/libstdc++-v3/include/bits/ostream.tcc:51</span><br><span class="line">51      /opt/conda/conda-bld/gcc-compiler_1654084175708/work/build/gcc-final/x86_64-conda-linux-gnu/libstdc++-v3/include/bits/ostream.tcc: No such file or directory.</span><br><span class="line">(gdb) run fill_time.py</span><br><span class="line">The program being debugged has been started already.</span><br><span class="line">Start it from the beginning? (y or n) y</span><br><span class="line">Starting program: /home/jkup/.conda/envs/quant/bin/python fill_time.py</span><br><span class="line">[Thread debugging using libthread_db enabled]                                                                                                                                                                                               </span><br><span class="line">Using host libthread_db library <span class="string">&quot;/usr/lib/libthread_db.so.1&quot;</span>.</span><br><span class="line">[New Thread 0x7ffff45ff6c0 (LWP 3265)]                                                                                                                                                                                                      </span><br><span class="line">[New Thread 0x7ffff1dfe6c0 (LWP 3266)]</span><br><span class="line">[New Thread 0x7fffef5fd6c0 (LWP 3267)]</span><br><span class="line">[New Thread 0x7fffecdfc6c0 (LWP 3268)]</span><br><span class="line">[New Thread 0x7fffec5fb6c0 (LWP 3269)]</span><br><span class="line">[New Thread 0x7fffe7dfa6c0 (LWP 3270)]</span><br><span class="line">[New Thread 0x7fffe55f96c0 (LWP 3271)]</span><br><span class="line">[New Thread 0x7fffe2df86c0 (LWP 3272)]</span><br><span class="line">[New Thread 0x7fffe05f76c0 (LWP 3273)]</span><br><span class="line">[New Thread 0x7fffdddf66c0 (LWP 3274)]</span><br><span class="line">[New Thread 0x7fffdb5f56c0 (LWP 3275)]</span><br><span class="line">[New Thread 0x7fffd8df46c0 (LWP 3276)]</span><br><span class="line">[New Thread 0x7fffd65f36c0 (LWP 3277)]</span><br><span class="line">[New Thread 0x7fffd3df26c0 (LWP 3278)]</span><br><span class="line">[New Thread 0x7fffd35f16c0 (LWP 3279)]</span><br><span class="line">                                                                                                                                                                                                                                            </span><br><span class="line">Thread 1 <span class="string">&quot;python&quot;</span> received signal SIGSEGV, Segmentation fault.</span><br><span class="line">0x00007fffcc488f3a <span class="keyword">in</span> std::basic_ostream&lt;char, std::char_traits&lt;char&gt; &gt;::sentry::sentry (this=0x7fffffffc980, __os=...)</span><br><span class="line">    at /opt/conda/conda-bld/gcc-compiler_1654084175708/work/build/gcc-final/x86_64-conda-linux-gnu/libstdc++-v3/include/bits/ostream.tcc:51</span><br><span class="line">51      /opt/conda/conda-bld/gcc-compiler_1654084175708/work/build/gcc-final/x86_64-conda-linux-gnu/libstdc++-v3/include/bits/ostream.tcc: No such file or directory.</span><br><span class="line">(gdb) backtrace</span><br><span class="line"><span class="comment">#0  0x00007fffcc488f3a in std::basic_ostream&lt;char, std::char_traits&lt;char&gt; &gt;::sentry::sentry (this=0x7fffffffc980, __os=...)</span></span><br><span class="line">    at /opt/conda/conda-bld/gcc-compiler_1654084175708/work/build/gcc-final/x86_64-conda-linux-gnu/libstdc++-v3/include/bits/ostream.tcc:51</span><br><span class="line"><span class="comment">#1  0x00007fffcc48967c in std::__ostream_insert&lt;char, std::char_traits&lt;char&gt; &gt; (__out=..., __s=0x7fffcbc27573 &quot;on &quot;, __n=3)</span></span><br><span class="line">    at /opt/conda/conda-bld/gcc-compiler_1654084175708/work/build/gcc-final/x86_64-conda-linux-gnu/libstdc++-v3/include/bits/ostream_insert.h:83</span><br><span class="line"><span class="comment">#2  0x00007fffcbc24e6b in OrderBook::on_order(int, int, int, int, int, int, int, bool) () from /home/jkup/Quant/cython_orderbook-master/odb.cpython-310-x86_64-linux-gnu.so</span></span><br><span class="line"><span class="comment">#3  0x00007fffcbc21f93 in __pyx_pw_3odb_11PyOrderBook_7on_order(_object*, _object* const*, long, _object*) () from /home/jkup/Quant/cython_orderbook-master/odb.cpython-310-x86_64-linux-gnu.so</span></span><br><span class="line"><span class="comment">#4  0x000000000050825a in _PyObject_VectorcallTstate (kwnames=&lt;optimized out&gt;, nargsf=&lt;optimized out&gt;, args=&lt;optimized out&gt;, callable=0x7fffcbc41e50, tstate=0x75b780)</span></span><br><span class="line">    at /usr/local/src/conda/python-3.10.13/Include/cpython/abstract.h:114</span><br><span class="line"><span class="comment">#5  method_vectorcall (method=&lt;optimized out&gt;, args=&lt;optimized out&gt;, nargsf=&lt;optimized out&gt;, kwnames=&lt;optimized out&gt;) at /usr/local/src/conda/python-3.10.13/Objects/classobject.c:83</span></span><br><span class="line"><span class="comment">#6  0x00000000004efb19 in do_call_core (kwdict=0x0, callargs=0x7fffc6a525e0, func=0x7fffcb0a8c00, trace_info=0x7fffffffccc0, tstate=&lt;optimized out&gt;) at /usr/local/src/conda/python-3.10.13/Python/ceval.c:5945</span></span><br><span class="line"><span class="comment">#7  _PyEval_EvalFrameDefault (tstate=&lt;optimized out&gt;, f=0x7fffcb252dc0, throwflag=&lt;optimized out&gt;) at /usr/local/src/conda/python-3.10.13/Python/ceval.c:4277</span></span><br><span class="line"><span class="comment">#8  0x00000000004fcadf in _PyEval_EvalFrame (throwflag=0, f=0x7fffcb252dc0, tstate=0x75b780) at /usr/local/src/conda/python-3.10.13/Include/internal/pycore_ceval.h:46</span></span><br><span class="line"><span class="comment">#9  _PyEval_Vector (kwnames=&lt;optimized out&gt;, argcount=&lt;optimized out&gt;, args=&lt;optimized out&gt;, locals=0x0, con=0x7fffcb53d6d0, tstate=0x75b780) at /usr/local/src/conda/python-3.10.13/Python/ceval.c:5067</span></span><br><span class="line"><span class="comment">#10 _PyFunction_Vectorcall (func=0x7fffcb53d6c0, stack=&lt;optimized out&gt;, nargsf=&lt;optimized out&gt;, kwnames=&lt;optimized out&gt;) at /usr/local/src/conda/python-3.10.13/Objects/call.c:342</span></span><br><span class="line"><span class="comment">#11 0x00000000004ed2bf in _PyObject_VectorcallTstate (kwnames=0x0, nargsf=&lt;optimized out&gt;, args=0x16433d0, callable=0x7fffcb53d6c0, tstate=0x75b780) at /usr/local/src/conda/python-3.10.13/Include/cpython/abstract.h:114</span></span><br><span class="line"><span class="comment">#12 PyObject_Vectorcall (kwnames=0x0, nargsf=&lt;optimized out&gt;, args=0x16433d0, callable=0x7fffcb53d6c0) at /usr/local/src/conda/python-3.10.13/Include/cpython/abstract.h:123</span></span><br><span class="line"><span class="comment">#13 call_function (kwnames=0x0, oparg=&lt;optimized out&gt;, pp_stack=&lt;synthetic pointer&gt;, trace_info=0x7fffffffce80, tstate=&lt;optimized out&gt;) at /usr/local/src/conda/python-3.10.13/Python/ceval.c:5893</span></span><br><span class="line"><span class="comment">#14 _PyEval_EvalFrameDefault (tstate=&lt;optimized out&gt;, f=0x1643140, throwflag=&lt;optimized out&gt;) at /usr/local/src/conda/python-3.10.13/Python/ceval.c:4213</span></span><br><span class="line"><span class="comment">#15 0x00000000004fcadf in _PyEval_EvalFrame (throwflag=0, f=0x1643140, tstate=0x75b780) at /usr/local/src/conda/python-3.10.13/Include/internal/pycore_ceval.h:46</span></span><br><span class="line"><span class="comment">#16 _PyEval_Vector (kwnames=&lt;optimized out&gt;, argcount=&lt;optimized out&gt;, args=&lt;optimized out&gt;, locals=0x0, con=0x7fffcbcb91c0, tstate=0x75b780) at /usr/local/src/conda/python-3.10.13/Python/ceval.c:5067</span></span><br><span class="line"><span class="comment">#17 _PyFunction_Vectorcall (func=0x7fffcbcb91b0, stack=&lt;optimized out&gt;, nargsf=&lt;optimized out&gt;, kwnames=&lt;optimized out&gt;) at /usr/local/src/conda/python-3.10.13/Objects/call.c:342</span></span><br><span class="line"><span class="comment">#18 0x00000000004ee353 in _PyObject_VectorcallTstate (kwnames=0x7ffff78a35e0, nargsf=&lt;optimized out&gt;, args=&lt;optimized out&gt;, callable=0x7fffcbcb91b0, tstate=0x75b780) at /usr/local/src/conda/python-3.10.13/Include/cpython/abstract.h:114</span></span><br><span class="line"><span class="comment">#19 PyObject_Vectorcall (kwnames=0x7ffff78a35e0, nargsf=&lt;optimized out&gt;, args=&lt;optimized out&gt;, callable=0x7fffcbcb91b0) at /usr/local/src/conda/python-3.10.13/Include/cpython/abstract.h:123</span></span><br><span class="line"><span class="comment">#20 call_function (kwnames=0x7ffff78a35e0, oparg=&lt;optimized out&gt;, pp_stack=&lt;synthetic pointer&gt;, trace_info=0x7fffffffd040, tstate=&lt;optimized out&gt;) at /usr/local/src/conda/python-3.10.13/Python/ceval.c:5893</span></span><br><span class="line"><span class="comment">#21 _PyEval_EvalFrameDefault (tstate=&lt;optimized out&gt;, f=0x7ffff791da40, throwflag=&lt;optimized out&gt;) at /usr/local/src/conda/python-3.10.13/Python/ceval.c:4231</span></span><br><span class="line"><span class="comment">#22 0x0000000000591d92 in _PyEval_EvalFrame (throwflag=0, f=0x7ffff791da40, tstate=0x75b780) at /usr/local/src/conda/python-3.10.13/Include/internal/pycore_ceval.h:46</span></span><br><span class="line"><span class="comment">#23 _PyEval_Vector (tstate=tstate@entry=0x75b780, con=con@entry=0x7fffffffd140, locals=locals@entry=0x7ffff7835480, args=args@entry=0x0, argcount=argcount@entry=0, kwnames=kwnames@entry=0x0)</span></span><br><span class="line">    at /usr/local/src/conda/python-3.10.13/Python/ceval.c:5067</span><br><span class="line"><span class="comment">#24 0x0000000000591cd7 in PyEval_EvalCode (co=co@entry=0x7ffff7877b50, globals=globals@entry=0x7ffff7835480, locals=locals@entry=0x7ffff7835480) at /usr/local/src/conda/python-3.10.13/Python/ceval.c:1134</span></span><br><span class="line"><span class="comment">#25 0x00000000005c2967 in run_eval_code_obj (tstate=tstate@entry=0x75b780, co=co@entry=0x7ffff7877b50, globals=globals@entry=0x7ffff7835480, locals=locals@entry=0x7ffff7835480)</span></span><br><span class="line">    at /usr/local/src/conda/python-3.10.13/Python/pythonrun.c:1291</span><br><span class="line"><span class="comment">#26 0x00000000005bdad0 in run_mod (mod=mod@entry=0x899e28, filename=filename@entry=0x7ffff7838340, globals=globals@entry=0x7ffff7835480, locals=locals@entry=0x7ffff7835480, flags=flags@entry=0x7fffffffd338, </span></span><br><span class="line">    arena=arena@entry=0x7ffff78f7b90) at /usr/local/src/conda/python-3.10.13/Python/pythonrun.c:1312</span><br><span class="line"><span class="comment">#27 0x000000000045956b in pyrun_file (fp=fp@entry=0x757470, filename=filename@entry=0x7ffff7838340, start=start@entry=257, globals=globals@entry=0x7ffff7835480, locals=locals@entry=0x7ffff7835480, closeit=closeit@entry=1, </span></span><br><span class="line">    flags=0x7fffffffd338) at /usr/local/src/conda/python-3.10.13/Python/pythonrun.c:1208</span><br><span class="line"><span class="comment">#28 0x00000000005b805f in _PyRun_SimpleFileObject (fp=0x757470, filename=0x7ffff7838340, closeit=1, flags=0x7fffffffd338) at /usr/local/src/conda/python-3.10.13/Python/pythonrun.c:456</span></span><br><span class="line"><span class="comment">#29 0x00000000005b7dc3 in _PyRun_AnyFileObject (fp=0x757470, filename=filename@entry=0x7ffff7838340, closeit=closeit@entry=1, flags=flags@entry=0x7fffffffd338) at /usr/local/src/conda/python-3.10.13/Python/pythonrun.c:90</span></span><br><span class="line"><span class="comment">#30 0x00000000005b4b7d in pymain_run_file_obj (skip_source_first_line=0, filename=0x7ffff7838340, program_name=0x7ffff785ce70) at /usr/local/src/conda/python-3.10.13/Modules/main.c:357</span></span><br><span class="line"><span class="comment">#31 pymain_run_file (config=0x7825a0) at /usr/local/src/conda/python-3.10.13/Modules/main.c:376</span></span><br><span class="line"><span class="comment">#32 pymain_run_python (exitcode=0x7fffffffd330) at /usr/local/src/conda/python-3.10.13/Modules/main.c:591</span></span><br><span class="line"><span class="comment">#33 Py_RunMain () at /usr/local/src/conda/python-3.10.13/Modules/main.c:670</span></span><br><span class="line"><span class="comment">#34 0x0000000000584e49 in Py_BytesMain (argc=&lt;optimized out&gt;, argv=&lt;optimized out&gt;) at /usr/local/src/conda/python-3.10.13/Modules/main.c:1090</span></span><br><span class="line"><span class="comment">#35 0x00007ffff7d04cd0 in __libc_start_call_main (main=main@entry=0x584e00 &lt;main&gt;, argc=argc@entry=2, argv=argv@entry=0x7fffffffd568) at ../sysdeps/nptl/libc_start_call_main.h:58</span></span><br><span class="line"><span class="comment">#36 0x00007ffff7d04d8a in __libc_start_main_impl (main=0x584e00 &lt;main&gt;, argc=2, argv=0x7fffffffd568, init=&lt;optimized out&gt;, fini=&lt;optimized out&gt;, rtld_fini=&lt;optimized out&gt;, stack_end=0x7fffffffd558) at ../csu/libc-start.c:360</span></span><br><span class="line">--Type &lt;RET&gt; <span class="keyword">for</span> more, q to quit, c to <span class="built_in">continue</span> without paging--</span><br><span class="line"><span class="comment">#37 0x0000000000584cfe in _start ()</span></span><br></pre></td></tr></table></figure>
+<p>谷歌一圈，解决方案较少，并没有找到合适的解决方案。本来以为可能是使用<code>yay</code>安装到<code>/opt</code>下导致内存限制的问题。但重新在用户家目录下安装miniconda并未解决问题。</p>
+<p>之前使用Archlinux也遇到过不少问题，但都可以在Arch Wiki下找到答案，而且很多是由于更新软件包时不看提示信息导致的，这次搜索没有看到明显的有效信息。</p>
+<blockquote>
+<p>既然官方和社区都不支持Archlinux Wsl，那就卸了吧，继续使用“邪恶混沌”的Ubuntu。</p>
+<p>（虽然之前在做CMU15-213的Bomblab还是AttackLab时，在Ubuntu时运行程序也有问题，在Debian下没有问题……不过WSL还是要比VMware用着方便，将就着用吧）</p>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://jkup64.github.io">徒心</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://jkup64.github.io/2023/11/30/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95-Archlinux-WSL-Segment-Fault/">https://jkup64.github.io/2023/11/30/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95-Archlinux-WSL-Segment-Fault/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://jkup64.github.io" target="_blank">徒心的网络自留地</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/images/archlinux.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/11/18/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch12/" title="第12章 动态内存"><img class="cover" src="/images/cpp.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">第12章 动态内存</div></div></a></div><div class="next-post pull-right"><a href="/2023/12/03/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch13/" title="第13章 拷贝控制"><img class="cover" src="/images/cpp.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">第13章 拷贝控制</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%88%E4%B8%8A%E7%BB%93%E8%AE%BA%EF%BC%9A%E4%B8%8D%E8%A6%81%E4%BD%BF%E7%94%A8Archlinux-WSL"><span class="toc-number">1.</span> <span class="toc-text">先上结论：不要使用Archlinux WSL</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%97%AE%E9%A2%98"><span class="toc-number">2.</span> <span class="toc-text">问题</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 徒心</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>(() => {
+  const initWaline = () => {
+    const waline = Waline.init(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'https://waline-server-jkup64.vercel.app',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: false,
+    }, null))
+  }
+
+  const loadWaline = async () => {
+    if (typeof Waline === 'object') initWaline()
+    else {
+      await getCSS('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css')
+      await getScript('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js')
+      initWaline()
+    }
+  }
+
+  if ('Waline' === 'Waline' || !true) {
+    if (true) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

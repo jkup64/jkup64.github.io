@@ -1,20 +1,20 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>徒心的网络自留地</title><meta name="author" content="徒心"><meta name="copyright" content="徒心"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="我拥有的都是侥幸，我失去的是人生">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>徒心的网络自留地</title><meta name="author" content="徒心"><meta name="copyright" content="徒心"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="要温柔，要快乐">
 <meta property="og:type" content="website">
 <meta property="og:title" content="徒心的网络自留地">
 <meta property="og:url" content="https://jkup64.github.io/index.html">
 <meta property="og:site_name" content="徒心的网络自留地">
-<meta property="og:description" content="我拥有的都是侥幸，我失去的是人生">
+<meta property="og:description" content="要温柔，要快乐">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://jkup64.github.io/images/avater2.jpg">
 <meta property="article:author" content="徒心">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://jkup64.github.io/images/avater2.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://jkup64.github.io/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="6KEGOdCLLrPC5PX81XZwi31w2fujLtnRiMAZZjiFYow"/><meta name="baidu-site-verification" content="code-fuHCOXmgL5"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+<meta name="twitter:image" content="https://jkup64.github.io/images/avater2.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://jkup64.github.io/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="6KEGOdCLLrPC5PX81XZwi31w2fujLtnRiMAZZjiFYow"/><meta name="baidu-site-verification" content="code-fuHCOXmgL5"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
   root: '/',
   algolia: undefined,
   localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
   translate: undefined,
   noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"距离文章上次更新已过去","messageNext":"天, 内容可能已过期."},
-  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":500},
   copy: {
     success: '复制成功',
     error: '复制错误',
@@ -35,11 +35,9 @@
   copyright: undefined,
   lightbox: 'fancybox',
   Snackbar: undefined,
-  source: {
-    justifiedGallery: {
-      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
-      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
-    }
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
   },
   isPhotoFigcaption: false,
   islazyload: false,
@@ -55,85 +53,78 @@
   isHome: true,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2023-06-21 15:50:49'
-}</script><noscript><style type="text/css">
-  #nav {
-    opacity: 1
-  }
-  .justified-gallery img {
-    opacity: 1
-  }
-
-  #recent-posts time,
-  #post-meta time {
-    display: inline !important
-  }
-</style></noscript><script>(win=>{
-    win.saveToLocal = {
-      set: function setWithExpiry(key, value, ttl) {
-        if (ttl === 0) return
-        const now = new Date()
-        const expiryDay = ttl * 86400000
-        const item = {
-          value: value,
-          expiry: now.getTime() + expiryDay,
+  postUpdate: '2023-12-30 09:28:50'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
         }
-        localStorage.setItem(key, JSON.stringify(item))
-      },
-
-      get: function getWithExpiry(key) {
-        const itemStr = localStorage.getItem(key)
-
-        if (!itemStr) {
-          return undefined
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
         }
-        const item = JSON.parse(itemStr)
-        const now = new Date()
 
-        if (now.getTime() > item.expiry) {
-          localStorage.removeItem(key)
-          return undefined
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
         }
-        return item.value
-      }
-    }
-  
-    win.getScript = url => new Promise((resolve, reject) => {
-      const script = document.createElement('script')
-      script.src = url
-      script.async = true
-      script.onerror = reject
-      script.onload = script.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        script.onload = script.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(script)
-    })
-  
-    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
-      const link = document.createElement('link')
-      link.rel = 'stylesheet'
-      link.href = url
-      if (id) link.id = id
-      link.onerror = reject
-      link.onload = link.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        link.onload = link.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(link)
-    })
-  
-      win.activateDarkMode = function () {
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
         document.documentElement.setAttribute('data-theme', 'dark')
         if (document.querySelector('meta[name="theme-color"]') !== null) {
           document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
         }
       }
-      win.activateLightMode = function () {
+      win.activateLightMode = () => {
         document.documentElement.setAttribute('data-theme', 'light')
         if (document.querySelector('meta[name="theme-color"]') !== null) {
           document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
@@ -141,9 +132,9 @@
       }
       const t = saveToLocal.get('theme')
     
-          if (t === 'dark') activateDarkMode()
-          else if (t === 'light') activateLightMode()
-        
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
       const asideStatus = saveToLocal.get('aside-status')
       if (asideStatus !== undefined) {
         if (asideStatus === 'hide') {
@@ -153,248 +144,276 @@
         }
       }
     
-    const detectApple = () => {
-      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
-        document.documentElement.classList.add('apple')
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
       }
-    }
-    detectApple()
-    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/images/avater2.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">27</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="徒心的网络自留地"><span class="site-name">徒心的网络自留地</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover right"><a href="/2023/06/21/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-CSAPP-l3-attacklab/" title="CSAPP-Attacklab详解"><img class="post-bg" src="/images/csapp.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CSAPP-Attacklab详解"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/06/21/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-CSAPP-l3-attacklab/" title="CSAPP-Attacklab详解">CSAPP-Attacklab详解</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-06-21T08:35:04.000Z" title="发表于 2023-06-21 16:35:04">2023-06-21</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/CSAPP/">CSAPP</a></span></div><div class="content">Attack Lab [Updated 1/11/16] (README, Writeup, Release Notes, Self-Study Handout)
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/images/avater2.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">46</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="徒心的网络自留地"><span class="site-name">徒心的网络自留地</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover right"><a href="/2023/12/11/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch15/" title="第15章 面向对象程序设计"><img class="post-bg" src="/images/cpp.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第15章 面向对象程序设计"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/12/11/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch15/" title="第15章 面向对象程序设计">第15章 面向对象程序设计</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-12-11T13:45:58.000Z" title="发表于 2023-12-11 21:45:58">2023-12-11</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/C/">C++</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/C/%E3%80%8AC-Primer-5th%E3%80%8B/">《C++ Primer 5th》</a></span></div><div class="content">OOP：概述
 
-Note: This is the 64-bit successor to the 32-bit Buffer Lab.
-targets
-If you’re a self-study student, here are a pair of Ubuntu 12.4 targets that you can try out for yourself. You’ll need to run your targets using the “-q” option so that they don’t try to contact a non-existent grading server. If you’re an instructor with a CS:APP acount, you can download the solutions here.
+面向对象程序设计（object-oriented programming）的核心思想是数据抽象、继承和动态绑定。
+继承（inheritance）：
 
-实验作业网址：http://csapp.cs.cmu.edu/3e/labs. ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/06/01/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch06/" title="第6章 函数"><img class="post-bg" src="/images/cpp.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第6章 函数"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/06/01/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch06/" title="第6章 函数">第6章 函数</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-06-01T12:10:58.000Z" title="发表于 2023-06-01 20:10:58">2023-06-01</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/C/">C++</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/C/%E3%80%8AC-Primer-5th%E3%80%8B/">《C++ Primer 5th》</a></span></div><div class="content">第6章 函数
-函数基础
+通过继承联系在一起的类构成一种层次关系。
+通常在层次关系的根部有一个基类（base class）。
+其他类直接或者简介从基类继承而来，这些继承得到的类成为派生类（derived class）。
+基类负责定义在层次关系中所有类共同拥有的成员，而每个派生类定义各自特有的成员。
+对于某些函数，基类希望它的派生类个自定义适合自己的版本，此时基类就将这些函数声明成虚函数（virtual function）。
+派生类必须通过使用类派生列表（class derivation list）明确指出它是从哪个基类继承而来。形式：一个冒号，后面紧跟以逗号分隔的基类列表，每个基类前都可以有访问说明符。class Bulk_quote : public Quote&#123;&#125;;
+派生类必须在其内部对所有重新定义的虚函数进行声明。可以在函数之前加上virtual关键字，也可以不加。C++11新标准允许派生类显式地注明它将使用哪个成员函数改 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/12/04/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch14/" title="第14章 重载运算与类型转换"><img class="post-bg" src="/images/cpp.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第14章 重载运算与类型转换"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/12/04/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch14/" title="第14章 重载运算与类型转换">第14章 重载运算与类型转换</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-12-04T13:45:58.000Z" title="发表于 2023-12-04 21:45:58">2023-12-04</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/C/">C++</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/C/%E3%80%8AC-Primer-5th%E3%80%8B/">《C++ Primer 5th》</a></span></div><div class="content">基本概念
 
-函数定义：包括返回类型、函数名字和0个或者多个形参（parameter）组成的列表和函数体。
-调用运算符：调用运算符的形式是一对圆括号 ()，作用于一个表达式，该表达式是函数或者指向函数的指针。
-圆括号内是用逗号隔开的实参（argument）列表。
-函数调用过程：
+重载运算符是具有特殊名字的函数：由关键字operator和其后要定义的运算符号共同组成。
+除了重载的函数调用运算符()外，其他重载运算符不能含有默认实参。
+当一个重载的运算符是成员函数时，this绑定到左侧运算对象。动态运算符符函数的参数数量比运算对象的数量少一个。
+只能重载大多数的运算符，而不能发明新的运算符号。
+重载运算符的优先级和结合律跟对应的内置运算符保持一致。
+调用方式：
 
-1.主调函数（calling function）的执行被中断。
-2.被调函数（called function）开始执行。
-
-
-形参和实参：形参和实参的个数和类型必须匹配上。
-返回类型： void表示函数不返回任何值。函数的返回类型不能是数组类型或者函数类型，但可以是指向数组或者函数的指针。
-名字：名字的作用于是程序文本的一部分，名字在其中可见。
-
-局部对象
-
-生命周期：对象的生命周期是程序执行过程中该对象存在的一段时间。
-局部变量（local variable）：形参和函数体内部定义的变量统称为局部变量。它对函数而言是局部的，对函数外部而言是隐藏的。
-自动对象：只存在于块执行期间的对象。当块的执行结束后，它的值就变成未定义的了。
-局部静态对象： static类型的局部变量，生命周期贯穿函数调用前后 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/05/27/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-CSAPP-l2-bomblab/" title="CSAPP-Bomblab详解（含secret_phase）"><img class="post-bg" src="/images/csapp.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CSAPP-Bomblab详解（含secret_phase）"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/05/27/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-CSAPP-l2-bomblab/" title="CSAPP-Bomblab详解（含secret_phase）">CSAPP-Bomblab详解（含secret_phase）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-05-27T08:35:04.000Z" title="发表于 2023-05-27 16:35:04">2023-05-27</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/CSAPP/">CSAPP</a></span></div><div class="content">Data Lab [Updated 1/12/16] (README, Writeup, Release Notes, Self-Study Handout)
-
-A “binary bomb” is a program provided to students as an object code file. When run, it prompts the user to type in 6 different strings. If any of these is incorrect, the bomb “explodes,” printing an error message and logging the event on a grading server. Students must “defuse” their own unique bomb by disassembling and reverse engineering the program to determine what the 6 strings should be. The lab teaches studen ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/05/24/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch05/" title="第5章 语句"><img class="post-bg" src="/images/cpp.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第5章 语句"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/05/24/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch05/" title="第5章 语句">第5章 语句</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-05-24T12:10:58.000Z" title="发表于 2023-05-24 20:10:58">2023-05-24</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/C/">C++</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/C/%E3%80%8AC-Primer-5th%E3%80%8B/">《C++ Primer 5th》</a></span></div><div class="content">第5章 语句
-简单语句
-
-表达式语句：一个表达式末尾加上分号，就变成了表达式语句。
-空语句：只有一个单独的分号。
-复合语句（块）：用花括号 &#123;&#125;包裹起来的语句和声明的序列。一个块就是一个作用域。
-
-条件语句
-
-悬垂else（dangling else）：用来描述在嵌套的if else语句中，如果if比else多时如何处理的问题。C++使用的方法是else匹配最近没有配对的if。
-
-迭代语句
-
-while：当不确定到底要迭代多少次时，使用 while循环比较合适，比如读取输入的内容。
-for： for语句可以省略掉 init-statement， condition和 expression的任何一个；甚至全部。
-范围for： for (declaration: expression) statement
-
-跳转语句
-
-break：break语句负责终止离它最近的while、do while、for或者switch语句，并从这些语句之后的第一条语句开始继续执行。
-continue：终止最近的循环中的当前迭代并立即开始下一次迭代。只能在while、do while、for ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/05/21/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-CSAPP-l1-datalab/" title="CSAPP-Datalab详解"><img class="post-bg" src="/images/csapp.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CSAPP-Datalab详解"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/05/21/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-CSAPP-l1-datalab/" title="CSAPP-Datalab详解">CSAPP-Datalab详解</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-05-21T08:35:04.000Z" title="发表于 2023-05-21 16:35:04">2023-05-21</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/CSAPP/">CSAPP</a></span></div><div class="content">Data Lab [Updated 12/16/19] (README, Writeup, Release Notes, Self-Study Handout)
-
-Students implement simple logical, two’s complement, and floating point functions, but using a highly restricted subset of C. For example, they might be asked to compute the absolute value of a number using only bit-level operations and straightline code. This lab helps students understand the bit-level representations of C data types and the bit-level behavior of the operations on data.
-
-实验作业网址：http://csapp.cs.cmu ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/05/17/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch04/" title="第4章 表达式"><img class="post-bg" src="/images/cpp.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第4章 表达式"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/05/17/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch04/" title="第4章 表达式">第4章 表达式</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-05-17T12:10:58.000Z" title="发表于 2023-05-17 20:10:58">2023-05-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/C/">C++</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/C/%E3%80%8AC-Primer-5th%E3%80%8B/">《C++ Primer 5th》</a></span></div><div class="content">第4章 表达式
-表达式基础
-
-运算对象转换：小整数类型会被提升为较大的整数类型
-重载运算符：当运算符作用在类类型的运算对象时，用户可以自行定义其含义。
-左值和右值：
-
-C中原意：左值可以在表达式左边，右值不能。
-C++：当一个对象被用作右值的时候，用的是对象的值（内容）；
-被用做左值时，用的是对象的身份（在内存中的位置）。
-
-
-求值顺序：int i = f1() + f2()
-
-先计算f1() + f2(),再计算int i = f1() + f2()。但是f1和f2的计算先后不确定
-但是，如果f1、f2都对同一对象进行了修改，因为顺序不确定，所以会编译出错，显示未定义
+data1 + data2;
+operator+(data1, data2); 成员
+data1.operator+=(data2); 非成员
 
 
 
-算术运算符
-
-溢出：当计算的结果超出该类型所能表示的范围时就会产生溢出。
-bool类型不应该参与计算1234bool b=true;bool b2=-b;   //仍然为true//b为true，提升为对应int=1，-b=-1//b2=-1≠0，所以b2仍未true
-
-取余运算m%n，结果符号与m相同
-
-逻辑运算符
-
-短路求值：逻辑与运算符和逻辑或运算符都是先求左侧运算对象的值再求右侧运算对象的值，当且仅当左侧 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/05/12/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch03/" title="第3章 字符串、向量和数组"><img class="post-bg" src="/images/cpp.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第3章 字符串、向量和数组"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/05/12/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch03/" title="第3章 字符串、向量和数组">第3章 字符串、向量和数组</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-05-12T12:10:58.000Z" title="发表于 2023-05-12 20:10:58">2023-05-12</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/C/">C++</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/C/%E3%80%8AC-Primer-5th%E3%80%8B/">《C++ Primer 5th》</a></span></div><div class="content">第3章 字符串、向量和数组
-using声明
-
-使用某个命名空间：例如 using std::cin表示使用命名空间std中的名字cin。
-头文件中不应该包含using声明。这样使用了该头文件的源码也会使用这个声明，会带来风险。
-
-string
-
-标准库类型string表示可变长的字符序列。
-#include &lt;string&gt;，然后 using std::string;
-string对象：注意，不同于字符串字面值。
-
-定义和初始化string对象
-初始化string对象的方式：
+运算符:
 
 
 
-方式
+可以被重载
+不可以被重载
+
+
+
+
++, -, *, /, %, ^
+::, .*, ., ? :,
+
+
+&amp;, `
+, ~`, `!`, `,`, `=`
+
+
+&lt;, &gt;, &lt;=, &gt;=, ++, --
+
+
+
+&lt;&lt;, &gt;&gt;, ==, !=, &amp;&amp;, `
+
+
+
++=, -=, /=, %=, ^=, &amp;=
+
+
+
+|=, *=, &lt;&lt;=, &gt; ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/12/03/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch13/" title="第13章 拷贝控制"><img class="post-bg" src="/images/cpp.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第13章 拷贝控制"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/12/03/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch13/" title="第13章 拷贝控制">第13章 拷贝控制</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-12-03T13:45:58.000Z" title="发表于 2023-12-03 21:45:58">2023-12-03</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/C/">C++</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/C/%E3%80%8AC-Primer-5th%E3%80%8B/">《C++ Primer 5th》</a></span></div><div class="content">拷贝控制操作（copy control）:
+
+拷贝构造函数（copy constructor）
+拷贝赋值运算符（copy-assignment operator）
+移动构造函数（move constructor）
+移动赋值函数（move-assignement operator）
+析构函数（destructor）
+
+拷贝和移动构造函数定义了当用同类型的另一个对象初始化本对象时做什么，拷贝和移动赋值运算符定义了将一个对象赋予同类型的另一个对象时做什么。
+拷贝、赋值和销毁
+拷贝构造函数
+
+
+如果一个构造函数的第一个参数是自身类类型的引用，且任何额外参数都有默认值，则此构造函数是拷贝构造函数。
+
+注意拷贝构造函数的第一个参数必须是一个引用类型，虽然可以定义接受非const引用的拷贝构造函数，但此参数几乎总是一个const引用。
+为什么要引用类型：拷贝构造函数被用来初始化非引用类类型参数（非引用形参采取值复制，复制会调用拷贝构造函数），如果其参数不是引用类型，那么调用永远不会成功——为了调用拷贝构造函数，必须拷贝其实参，但为了拷贝实参，我们又需要调用拷贝构造函数，如此无限循环。
+
+
+
+clas ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/11/30/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95-Archlinux-WSL-Segment-Fault/" title="Archlinux WSL Segment Fault on Cypthon"><img class="post-bg" src="/images/archlinux.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Archlinux WSL Segment Fault on Cypthon"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/11/30/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95-Archlinux-WSL-Segment-Fault/" title="Archlinux WSL Segment Fault on Cypthon">Archlinux WSL Segment Fault on Cypthon</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-11-30T06:51:05.000Z" title="发表于 2023-11-30 14:51:05">2023-11-30</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/">踩坑记录</a></span></div><div class="content">先上结论：不要使用Archlinux WSL
+重要的事情说三遍：
+
+不要使用Archlinux WSL
+不要使用Archlinux WSL
+不要使用Archlinux WSL
+
+看看Archlinux on WSL? / Other Architectures / Arch Linux Forums中大伙的评论：
+
+It seems to be a set of initial unconfigured packages that you have to configure yourself.
+It isn’t Arch, and it isn’t supported by the community.
+Or is it maybe something unacceptable about it?
+Correct, see http://archlinux.2023198.n4.nabble.com/ … l#a4718292
+
+官方和社区都不支持，那还玩啥？
+问题
+下面给出一个我在使用ArchLinux WSL中遇到的问题：
+当使用python运行一个使用了Cpython的脚本时，引 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/11/18/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch12/" title="第12章 动态内存"><img class="post-bg" src="/images/cpp.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第12章 动态内存"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/11/18/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch12/" title="第12章 动态内存">第12章 动态内存</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-11-18T03:03:58.000Z" title="发表于 2023-11-18 11:03:58">2023-11-18</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/C/">C++</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/C/%E3%80%8AC-Primer-5th%E3%80%8B/">《C++ Primer 5th》</a></span></div><div class="content">
+
+对象的生命周期：
+
+全局对象在程序启动时分配，结束时销毁。
+局部对象在进入程序块时创建，离开块时销毁。
+局部static对象在第一次使用前分配，在程序结束时销毁。
+动态分配对象：只能显式地被释放。
+
+
+
+对象的内存位置：
+
+静态内存用来保存局部static对象、类static对象、定义在任何函数之外的变量。
+栈内存用来保存定义在函数内的非static对象。
+堆内存，又称自由空间，用来存储动态分配的对象。
+
+
+
+如果忘记释放内存就会产生内存泄漏；如果在尚有指针引用的情况下就释放就会产生引用非法内存的指针。
+
+
+动态内存与智能指针
+
+动态内存管理：
+
+new：在动态内存中为对象分配空间并返回一个指向该对象的指针。
+delete：接受一个动态对象的指针，销毁该对象，并释放与之关联的内存。
+
+
+智能指针：
+
+管理动态对象。
+行为类似常规指针。
+负责自动释放所指向的对象。
+智能指针也是模板。
+定义在memory头文件中。
+
+
+
+shared_ptr类
+shared_ptr和unique_ptr都支持的操作：
+
+
+
+操作
 解释
 
 
 
 
-string s1
-默认初始化，s1是个空字符串
+shared_ptr&lt;T&gt; sp  uniqu ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/11/15/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch11/" title="第11章 关联容器"><img class="post-bg" src="/images/cpp.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第11章 关联容器"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/11/15/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch11/" title="第11章 关联容器">第11章 关联容器</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-11-15T14:48:58.000Z" title="发表于 2023-11-15 22:48:58">2023-11-15</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/C/">C++</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/C/%E3%80%8AC-Primer-5th%E3%80%8B/">《C++ Primer 5th》</a></span></div><div class="content">
+关联容器和顺序容器的不同：关联容器中的元素时按照关键字来保存和访问的。
+关联容器支持通过关键字来高效地查找和读取元素，基本的关联容器类型是 map和 set。
 
+关联容器类型：
 
-string s2(s1)
-s2是s1的副本
-
-
-string s2 = s1
-等价于s2(s1)，s2是s1的副本
-
-
-string s3(&quot;value&quot;)
-s3是字面值“value”的副本，除了字面值最后的那个空字符外
-
-
-string s3 = &quot;value&quot;
-等价于s3(&quot;value&quot;)，s3是字面值&quot;value&quot;的副本
-
-
-strin ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/05/05/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch02/" title="第2章 变量和基本类型"><img class="post-bg" src="/images/cpp.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第2章 变量和基本类型"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/05/05/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch02/" title="第2章 变量和基本类型">第2章 变量和基本类型</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-05-05T12:10:58.000Z" title="发表于 2023-05-05 20:10:58">2023-05-05</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/C/">C++</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/C/%E3%80%8AC-Primer-5th%E3%80%8B/">《C++ Primer 5th》</a></span></div><div class="content">第2章 变量和基本类型
-[toc]
-任何常用的编程语言都具备一组公共的语法特征，最基本的特征包括：
-
-整型、字符型等内置类型
-变量，用来为对象命名
-表达式和语句，用于操作上述数据类型的具体值
-if 或 while 等控制结构，有选择地执行一些语句或重复地执行一些语句
-函数，用于定义可供随时调用的计算单元
-
-大多数编程语言通过两种方式来进一步补充其基本特征：
-
-自定义数据类型，实现对语言的扩展
-将一些有用的功能封装成库函数
-
-基本内置类型
-基本算数类型：
-
-
-
-类型
-含义
-最小尺寸
+map和multimap在头文件map中；set和multiset在头文件set中
+无序容器分别定义在unordered_map和unordered_set中
+当从map中提取一个元素时，会得到一个pair类型的对象
+pair是一个模版类型，保存两个名为first和second的（公有）数据成员
+set的底层实现是红黑树
 
 
 
 
-bool
-布尔类型
-8bits
+容器类型
+解释
 
 
-char
-字符
-8bits
 
 
-wchar_t
-宽字符
-16bits
+按顺序存储
 
 
-char16_t
-Unicode字符
-16bits
+
+map
+关键数组：保存关键字-值对
 
 
-char32_t
-Unicode字符
-32bits
+set
+关键字即值，即只保存关键字的容器
 
 
-short
-短整型
-16bits
+multimap
+支持同一个键多次出现的map
 
 
-int
-整型
-16bits (在32位机器中是32bits)
+multiset
+支持同一个键多次出现的set
 
 
-long
-长整型
-32bits
+无序集合
 
 
-long long
-长整型
-64bits （是在C++11中新定义的）
+
+unordered_map
+用哈希函数组织的map
 
 
-float
-单精度浮点数
-6位有效数字
+unordered_set
+用哈希函数组织的set
 
 
-double
-双精度浮点 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/05/01/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch01/" title="第1章 开始"><img class="post-bg" src="/images/cpp.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第1章 开始"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/05/01/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch01/" title="第1章 开始">第1章 开始</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-05-01T12:10:58.000Z" title="发表于 2023-05-01 20:10:58">2023-05-01</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/C/">C++</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/C/%E3%80%8AC-Primer-5th%E3%80%8B/">《C++ Primer 5th》</a></span></div><div class="content">第1章 开始
-熟悉编译器
-g++：
+unordered_multimap
+哈希组织的map，关键字可以重复出现
 
-编译：g++ --std=c++11 ch01.cpp -o main
-运行：./prog1
-查看运行状态：echo $?
-编译多个文件:g++ ch2.cpp Sales_item.cc -o main
 
-输入 g++ --help，查看编译器选项，部分常见选项如下：
-123456-E                       Preprocess only; do not compile, assemble or link-S                       Compile only; do not assemble or link-c                       Compile and assemble, but do not link-o &lt;file&gt;                Place the output into &lt;file&gt;-pie                     Create a position independent executable-shared     ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/04/15/C-Cherno-Cherno%E7%AC%94%E8%AE%B0-51-70/" title="Cherno笔记(51-70)"><img class="post-bg" src="/images/cpp.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Cherno笔记(51-70)"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/04/15/C-Cherno-Cherno%E7%AC%94%E8%AE%B0-51-70/" title="Cherno笔记(51-70)">Cherno笔记(51-70)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-04-15T12:10:58.000Z" title="发表于 2023-04-15 20:10:58">2023-04-15</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/C/">C++</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/C/Cherno/">Cherno</a></span></div><div class="content">课程地址：Youtube上TheCherno上传的视频
-翻译：神经元猫的高质量翻译
-51 Making and Working with Libraries in C++ (Multiple Projects in Visual Studio)
-讲如何在vs中建立多个项目，以及如何创建一个库让所有项目都能用。
+unordered_multiset
+哈希组织 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/11/08/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%EF%BC%88B%EF%BC%89-lab2/" title="lab2 分布式文件系统"><img class="post-bg" src="/images/summer_fever.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="lab2 分布式文件系统"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/11/08/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%EF%BC%88B%EF%BC%89-lab2/" title="lab2 分布式文件系统">lab2 分布式文件系统</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-11-08T13:42:04.000Z" title="发表于 2023-11-08 21:42:04">2023-11-08</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%EF%BC%88B%EF%BC%89/">大数据系统基础（B）</a></span></div><div class="content">掌握Hadoop DFS常用指令
+1. Hadoop 使用方法
+在服务器上，我们通过Linux 指令对本地文件系统进行操作，如使用 ls 查看文件/目录信息、使用 cp进行文件复制、使用 cat 查看文件内容。在分布式文件系统中，也有一套相似的指令，接下来我们需要掌握一些基本的指令。（本题 1 分）
+1234567891011121314xxxxxxxxxx@thumm01:~$ hadoop fs -ls /Found 2 itemsdrwxr-xr-x   - root  supergroup          0 2023-10-06 20:48 /dsjxtjcdrwxrwxrwx   - jtliu supergroup          0 2020-12-21 23:25 /tmpxxxxxxxxxx@thumm01:~$ hadoop fs -ls /dsjxtjc/xxxxxxxxxxxxxxxxxxxx@thumm01:~$ touch test.txtxxxxxxxxxx@thumm01:~$ echo &quot;Hello Hadoop&quot; &gt;  ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/11/01/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch10/" title="第10章 泛型算法"><img class="post-bg" src="/images/cpp.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第10章 泛型算法"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/11/01/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch10/" title="第10章 泛型算法">第10章 泛型算法</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-11-01T12:10:58.000Z" title="发表于 2023-11-01 20:10:58">2023-11-01</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/C/">C++</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/C/%E3%80%8AC-Primer-5th%E3%80%8B/">《C++ Primer 5th》</a></span></div><div class="content">泛型算法
 
-确保目标project的配置类型为静态类.(lib)。
-设置“附件包含目录”以便能在include时能正确寻找到目标文件。
-添加引用，这会帮我们自动设置连接器输入，并且改名时不受影响，还会自动创建完整的依赖关系图，先编译依赖后编译此文件。
 
-由于是静态链接，移动后仍然可用，若为动态链接则必须和dll文件在同一目录下。
-52 How to Deal with Multiple Return Values in C++
-法1 返回struct
-法2 传入存结果的指针，没有动态分配
-从技术上来说可能是最理想的方法，因为没有复制。
-法3 返回数组——只有类型相同时才适用
-声明：static std::string* ParseShader(const std::string&amp;  ...</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/#content-inner">2</a><a class="page-number" href="/page/3/#content-inner">3</a><a class="extend next" rel="next" href="/page/2/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/images/avater2.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">徒心</div><div class="author-info__description">我拥有的都是侥幸，我失去的是人生</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">27</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/jkup64" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:919863493@q.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">暂无公告</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/06/21/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-CSAPP-l3-attacklab/" title="CSAPP-Attacklab详解">CSAPP-Attacklab详解</a><time datetime="2023-06-21T08:35:04.000Z" title="发表于 2023-06-21 16:35:04">2023-06-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/06/01/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch06/" title="第6章 函数">第6章 函数</a><time datetime="2023-06-01T12:10:58.000Z" title="发表于 2023-06-01 20:10:58">2023-06-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/05/27/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-CSAPP-l2-bomblab/" title="CSAPP-Bomblab详解（含secret_phase）">CSAPP-Bomblab详解（含secret_phase）</a><time datetime="2023-05-27T08:35:04.000Z" title="发表于 2023-05-27 16:35:04">2023-05-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/05/24/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch05/" title="第5章 语句">第5章 语句</a><time datetime="2023-05-24T12:10:58.000Z" title="发表于 2023-05-24 20:10:58">2023-05-24</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/05/21/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-CSAPP-l1-datalab/" title="CSAPP-Datalab详解">CSAPP-Datalab详解</a><time datetime="2023-05-21T08:35:04.000Z" title="发表于 2023-05-21 16:35:04">2023-05-21</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+因为它们实现共同的操作，所以称之为“算法”；而“泛型”指的是它们可以操作在多种容器类型上。
+算法通过在迭代器上进行操作来实现类型无关。
+
+
+泛型算法本身不执行容器操作，只是单独依赖迭代器和迭代器操作实现。
+
+
+头文件： #include &lt;algorithm&gt;或者 #include &lt;numeric&gt;(算数相关)
+
+
+大多数算法是通过遍历两个迭代器标记的一段元素来实现其功能。
+
+
+必要的编程假定：算法永远不会改变底层容器的大小。算法可能改变容器中保存的元素的值，也可能在容器内移动元素，但不能直接添加或者删除元素。
+
+标准库定义了一类特殊的迭代器，称为插入器（inserter）。
+当一个算法操作这样一个迭代器时，迭代器可以完成向容器添加元素的操作，但算法自身永远不会做这样的操作。
+
+
+
+find
+
+vector&lt;int&gt;::const_iterator result = find(vec.begin(), vec.end(), search_value);
+输入：两个标记范围的迭代器和目标查找值。返回：如果找到，返回对应的迭代器，否则返回 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/10/25/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%EF%BC%88B%EF%BC%89-lab1/" title="lab1 Linux基础实验"><img class="post-bg" src="/images/summer_fever.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="lab1 Linux基础实验"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/10/25/%E5%88%86%E5%B8%83%E5%BC%8F-%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%EF%BC%88B%EF%BC%89-lab1/" title="lab1 Linux基础实验">lab1 Linux基础实验</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-10-25T08:35:04.000Z" title="发表于 2023-10-25 16:35:04">2023-10-25</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%EF%BC%88B%EF%BC%89/">大数据系统基础（B）</a></span></div><div class="content">任务7. 多节点任务处理
+为了充分利用集群的运算性能，我们需要将资源分配至各个节点、协调各个节点的任务、整合多个结果等等。接下来我们来控制命令在多个主机上协同运行。目前集群节点有thumm01, thumm03~thumm05。
+集群主机之间免密登录配置
+请你用 linux shell 写一个脚本auto_autho.sh，实现各节点之间的免密登录。即实现thumm01分别到thumm03~thumm05的免密登录，使得运行该脚本后，可以通过ssh thumm0X从thumm01免密登录到X号节点。
+思路：这个脚本做的事情是在thumm01上生成2个节点的公钥和私钥，然后把所有公钥加入到authorized_keys中，然后把各自的公钥私钥以及authorized_keys分发到各个节点。
+auto_autho.sh
+方便进行后续实验，在实现thumm01免密登录thumm05和thumm06，同时实现thumm05到thumm06的免密登录。
+本脚本在第一次运行时需要确认连接（在查看ECDSA key fingerprint   后输入&quot;yes&quot;）并输入口令，实验 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/10/09/%E5%88%86%E5%B8%83%E5%BC%8F-MIT6-5840-Lec-3-GFS/" title="6.5840 2023 Lecture 3 GFS"><img class="post-bg" src="/images/MIT6.5840.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="6.5840 2023 Lecture 3 GFS"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/10/09/%E5%88%86%E5%B8%83%E5%BC%8F-MIT6-5840-Lec-3-GFS/" title="6.5840 2023 Lecture 3 GFS">6.5840 2023 Lecture 3 GFS</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-10-09T08:47:04.000Z" title="发表于 2023-10-09 16:47:04">2023-10-09</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/MIT6-5840/">MIT6.5840</a></span></div><div class="content">
+课程网址：https://pdos.csail.mit.edu/6.824/schedule.html
+以下内容来自课程课件，由于课件纯文本显示效果不佳，故对其排版整理并添加了部分个人笔记批注。
+
+Today’s topic: storage + gfs + consistency
+Why hard?
+high performance -&gt; shared data across servers
+many servers -&gt; constant faults
+fault tolerance -&gt; replication
+replication -&gt; potential inconsistencies
+storge consistencies -&gt; lower performance
+
+Ideal consistency: behave as if single system
+有两种风险: concurrency 和 fault
+
+Why storage system is important?
+建造fault tolerant存储系统后，应用程序可以是无状 ...</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/#content-inner">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/#content-inner">5</a><a class="extend next" rel="next" href="/page/2/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/images/avater2.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">徒心</div><div class="author-info__description">要温柔，要快乐</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">46</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">16</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/jkup64" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:919863493@q.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">暂无公告</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/12/11/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch15/" title="第15章 面向对象程序设计">第15章 面向对象程序设计</a><time datetime="2023-12-11T13:45:58.000Z" title="发表于 2023-12-11 21:45:58">2023-12-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/12/04/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch14/" title="第14章 重载运算与类型转换">第14章 重载运算与类型转换</a><time datetime="2023-12-04T13:45:58.000Z" title="发表于 2023-12-04 21:45:58">2023-12-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/12/03/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch13/" title="第13章 拷贝控制">第13章 拷贝控制</a><time datetime="2023-12-03T13:45:58.000Z" title="发表于 2023-12-03 21:45:58">2023-12-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/11/30/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95-Archlinux-WSL-Segment-Fault/" title="Archlinux WSL Segment Fault on Cypthon">Archlinux WSL Segment Fault on Cypthon</a><time datetime="2023-11-30T06:51:05.000Z" title="发表于 2023-11-30 14:51:05">2023-11-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/11/18/C-%E3%80%8AC-Primer-5th%E3%80%8B-ch12/" title="第12章 动态内存">第12章 动态内存</a><time datetime="2023-11-18T03:03:58.000Z" title="发表于 2023-11-18 11:03:58">2023-11-18</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
             <i class="fas fa-folder-open"></i>
             <span>分类</span>
             <a class="card-more-btn" href="/categories/" title="查看更多">
     <i class="fas fa-angle-right"></i></a>
             </div>
             <ul class="card-category-list" id="aside-cat-list">
-            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/C/"><span class="card-category-list-name">C++</span><span class="card-category-list-count">9</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/C/Cherno/"><span class="card-category-list-name">Cherno</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/C/%E3%80%8AC-Primer-5th%E3%80%8B/"><span class="card-category-list-name">《C++ Primer 5th》</span><span class="card-category-list-count">6</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E6%9D%82%E8%AE%B0/"><span class="card-category-list-name">生活杂记</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%AE%97%E6%B3%95/"><span class="card-category-list-name">算法</span><span class="card-category-list-count">8</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%AE%97%E6%B3%95/AcWing%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E8%AF%BE/"><span class="card-category-list-name">AcWing算法基础课</span><span class="card-category-list-count">5</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%AE%97%E6%B3%95/AcWing%E7%AE%97%E6%B3%95%E6%8F%90%E9%AB%98%E8%AF%BE/"><span class="card-category-list-name">AcWing算法提高课</span><span class="card-category-list-count">1</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%BB%8F%E9%AA%8C%E8%B4%B4/"><span class="card-category-list-name">经验贴</span><span class="card-category-list-count">1</span></a></li>
-            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/%E8%B4%AA%E5%BF%83/" style="font-size: 1.1em; color: #999">贪心</a> <a href="/tags/%E3%80%8A%E5%89%91%E6%8C%87offer%E3%80%8B/" style="font-size: 1.1em; color: #999">《剑指offer》</a> <a href="/tags/DP/" style="font-size: 1.3em; color: #99a1ac">DP</a> <a href="/tags/CSAPP/" style="font-size: 1.5em; color: #99a9bf">CSAPP</a> <a href="/tags/Hexo/" style="font-size: 1.1em; color: #999">Hexo</a> <a href="/tags/butterfly/" style="font-size: 1.1em; color: #999">butterfly</a> <a href="/tags/%E8%81%94%E9%82%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 1.1em; color: #999">联邦学习</a> <a href="/tags/%E9%9A%90%E7%A7%81%E8%AE%A1%E7%AE%97/" style="font-size: 1.3em; color: #99a1ac">隐私计算</a> <a href="/tags/Linux/" style="font-size: 1.1em; color: #999">Linux</a> <a href="/tags/%E7%AE%97%E6%B3%95%E9%A3%8E%E6%A0%BC/" style="font-size: 1.1em; color: #999">算法风格</a> <a href="/tags/PSI/" style="font-size: 1.3em; color: #99a1ac">PSI</a> <a href="/tags/%E6%95%B0%E4%BD%8DDP/" style="font-size: 1.1em; color: #999">数位DP</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/06/"><span class="card-archive-list-date">六月 2023</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/05/"><span class="card-archive-list-date">五月 2023</span><span class="card-archive-list-count">7</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/04/"><span class="card-archive-list-date">四月 2023</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/12/"><span class="card-archive-list-date">十二月 2022</span><span class="card-archive-list-count">5</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/11/"><span class="card-archive-list-date">十一月 2022</span><span class="card-archive-list-count">7</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/10/"><span class="card-archive-list-date">十月 2022</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/07/"><span class="card-archive-list-date">七月 2022</span><span class="card-archive-list-count">2</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">27</div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">111.7k</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2023-06-21T07:50:48.920Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 徒心</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script>function panguFn () {
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/C/"><span class="card-category-list-name">C++</span><span class="card-category-list-count">19</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/C/Cherno/"><span class="card-category-list-name">Cherno</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/C/%E3%80%8AC-Primer-5th%E3%80%8B/"><span class="card-category-list-name">《C++ Primer 5th》</span><span class="card-category-list-count">15</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Go/"><span class="card-category-list-name">Go</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/"><span class="card-category-list-name">分布式</span><span class="card-category-list-count">8</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/MIT6-5840/"><span class="card-category-list-name">MIT6.5840</span><span class="card-category-list-count">6</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80%EF%BC%88B%EF%BC%89/"><span class="card-category-list-name">大数据系统基础（B）</span><span class="card-category-list-count">2</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%8A%80%E5%B7%A7%E6%80%BB%E7%BB%93/"><span class="card-category-list-name">技巧总结</span><span class="card-category-list-count">1</span></a></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/Go/" style="font-size: 1.1em; color: #999">Go</a> <a href="/tags/%E9%9A%90%E7%A7%81%E8%AE%A1%E7%AE%97/" style="font-size: 1.23em; color: #999ea6">隐私计算</a> <a href="/tags/%E8%B4%AA%E5%BF%83/" style="font-size: 1.1em; color: #999">贪心</a> <a href="/tags/CSAPP/" style="font-size: 1.37em; color: #99a4b2">CSAPP</a> <a href="/tags/MIT6-5840%E8%AE%B2%E4%B9%89/" style="font-size: 1.5em; color: #99a9bf">MIT6.5840讲义</a> <a href="/tags/PSI/" style="font-size: 1.23em; color: #999ea6">PSI</a> <a href="/tags/%E3%80%8A%E5%89%91%E6%8C%87offer%E3%80%8B/" style="font-size: 1.1em; color: #999">《剑指offer》</a> <a href="/tags/%E8%81%94%E9%82%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 1.1em; color: #999">联邦学习</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 1.1em; color: #999">分布式</a> <a href="/tags/butterfly/" style="font-size: 1.1em; color: #999">butterfly</a> <a href="/tags/%E7%AE%97%E6%B3%95%E9%A3%8E%E6%A0%BC/" style="font-size: 1.1em; color: #999">算法风格</a> <a href="/tags/Linux/" style="font-size: 1.1em; color: #999">Linux</a> <a href="/tags/Hexo/" style="font-size: 1.1em; color: #999">Hexo</a> <a href="/tags/DP/" style="font-size: 1.23em; color: #999ea6">DP</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/" style="font-size: 1.5em; color: #99a9bf">分布式系统</a> <a href="/tags/%E6%95%B0%E4%BD%8DDP/" style="font-size: 1.1em; color: #999">数位DP</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/12/"><span class="card-archive-list-date">十二月 2023</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">十一月 2023</span><span class="card-archive-list-count">5</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">十月 2023</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/09/"><span class="card-archive-list-date">九月 2023</span><span class="card-archive-list-count">7</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/08/"><span class="card-archive-list-date">八月 2023</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/06/"><span class="card-archive-list-date">六月 2023</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/05/"><span class="card-archive-list-date">五月 2023</span><span class="card-archive-list-count">8</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/04/"><span class="card-archive-list-date">四月 2023</span><span class="card-archive-list-count">3</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">46</div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">181.3k</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2023-12-30T01:28:49.852Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 徒心</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script>function panguFn () {
   if (typeof pangu === 'object') pangu.autoSpacingPage()
   else {
     getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
@@ -412,4 +431,4 @@ function panguInit () {
   }
 }
 
-document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
